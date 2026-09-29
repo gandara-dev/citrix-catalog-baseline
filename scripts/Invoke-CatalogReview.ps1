@@ -49,7 +49,12 @@ param(
     [string]$MinimumVdaVersion = '2203',
     [int]$UnusedDays = 60,
     [double]$OverlapThreshold = 0.8,
-    [int]$MaxNestingDepth = 3
+    [int]$MaxNestingDepth = 3,
+
+    # Naming convention checks (CCB014): regular expressions for whole names.
+    [string]$CatalogNamePattern,
+    [string]$DeliveryGroupNamePattern,
+    [string]$MachineNamePattern
 )
 
 $ErrorActionPreference = 'Stop'
@@ -82,6 +87,9 @@ $settings = @{
     UnusedDays = $UnusedDays
     OverlapThreshold = $OverlapThreshold
     MaxNestingDepth = $MaxNestingDepth
+    CatalogNamePattern = $CatalogNamePattern
+    DeliveryGroupNamePattern = $DeliveryGroupNamePattern
+    MachineNamePattern = $MachineNamePattern
 }
 $report = New-CcbReport -Snapshot $snapshot @settings
 $reportFile = Join-Path $OutputDirectory 'report.json'

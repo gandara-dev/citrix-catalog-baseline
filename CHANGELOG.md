@@ -4,6 +4,22 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.0] - 2026-09-29
+
+### Added
+
+- `CCB014` reports catalogs, delivery groups, and machines whose names do not
+  match a naming convention given as regular expressions
+  (`-CatalogNamePattern`, `-DeliveryGroupNamePattern`, `-MachineNamePattern`);
+  the patterns are recorded in the report settings.
+- Naming convention guide.
+
+### Changed
+
+- The synthetic demo site follows an enterprise naming convention for
+  catalogs, delivery groups, machines, and AD groups, with one deliberate
+  exception for `CCB014`.
+
 ## [0.1.0] - 2026-09-29
 
 ### Added

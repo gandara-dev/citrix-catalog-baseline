@@ -35,6 +35,7 @@ Useful options:
 | `-Pseudonymize` | protect identities before anything is written |
 | `-IncludeCatalogNames` | with `-Pseudonymize`, also replace catalog, delivery group, and rule names |
 | `-SnapshotPath` | analyze a snapshot collected earlier, for example with other thresholds |
+| `-CatalogNamePattern`, `-DeliveryGroupNamePattern`, `-MachineNamePattern` | check names against your convention (CCB014) |
 
 `Get-CcbSiteSnapshot` exposes `-PooledSampleSize` (machines inventoried per
 pooled catalog, default 1), `-ThrottleLimit` (parallel remoting sessions,

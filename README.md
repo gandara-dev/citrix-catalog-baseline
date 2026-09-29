@@ -84,9 +84,13 @@ path shown for each user. See [docs/access-model.md](docs/access-model.md).
 | CCB011 | Medium | Circular group nesting |
 | CCB012 | Info | Users granted a desktop but blocked by the access policy |
 | CCB013 | Info | Disabled delivery groups that still entitle users |
+| CCB014 | Low | Catalogs, delivery groups, or machines outside your naming convention |
 
 Every recommendation lists the evidence rows that triggered it and a suggested
-action. Thresholds are parameters. Details in
+action. The demo site follows an enterprise naming convention
+(`MC-LIS-W11-POOL-FINANCE`, `DG-LIS-W11-DED-ENGINEERING`, `LISW11FIN001`);
+pass your own as regular expressions for `CCB014`, see
+[docs/naming-convention.md](docs/naming-convention.md). Thresholds are parameters. Details in
 [docs/recommendations.md](docs/recommendations.md).
 
 ## Try it without a Citrix site
@@ -136,6 +140,7 @@ JSON Schema check of the sample snapshot. See [docs/testing.md](docs/testing.md)
 
 - [Access model](docs/access-model.md)
 - [Recommendations](docs/recommendations.md)
+- [Naming convention](docs/naming-convention.md)
 - [Data safety](docs/data-safety.md)
 - [Operations guide](docs/operations-guide.md)
 - [Testing guide](docs/testing.md)
@@ -145,7 +150,7 @@ JSON Schema check of the sample snapshot. See [docs/testing.md](docs/testing.md)
 
 ## Current scope
 
-Version `0.1.0` covers on-premises Citrix Virtual Apps and Desktops and
+Version `0.2.0` covers on-premises Citrix Virtual Apps and Desktops and
 desktops only. It does not read Citrix Cloud (DaaS), published applications,
 or application groups, and it does not evaluate the connection type
 (`AllowedConnections`), SmartAccess tags, or client IP filters of access policy

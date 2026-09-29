@@ -72,7 +72,7 @@ AfterAll {
 Describe 'Module' {
     It 'declares the same version it reports at runtime' {
         $manifest = Import-PowerShellDataFile (Join-Path $PSScriptRoot '../src/CitrixCatalogBaseline/CitrixCatalogBaseline.psd1')
-        $manifest.ModuleVersion | Should -Be '0.1.0'
+        $manifest.ModuleVersion | Should -Be '0.2.0'
         $script:synthetic.site.collectorVersion | Should -Be $manifest.ModuleVersion
     }
 
@@ -191,7 +191,7 @@ Describe 'Resolve-CcbAccess' {
         @($script:syntheticAccess | Where-Object Status -eq 'Granted') | Should -HaveCount 137
         ($script:syntheticAccess | Where-Object Status -eq 'BlockedByAccessPolicy').UserName | Should -Be @('CORP\karin.duarte', 'CORP\luis.esteves')
         $deep = $script:syntheticAccess | Where-Object { $_.NestingDepth -ge 4 } | Select-Object -First 1
-        $deep.Path | Should -Be @('CORP\marta.faria', 'CORP\GRP-Team-Support-L2', 'CORP\GRP-Dept-Support', 'CORP\GRP-Office-Lisbon', 'CORP\GRP-Region-EMEA', 'CORP\GRP-VDI-AllStaff')
+        $deep.Path | Should -Be @('CORP\marta.faria', 'CORP\GRP-TEAM-SUPPORT-L2', 'CORP\GRP-DEPT-SUPPORT', 'CORP\GRP-OFFICE-LISBON', 'CORP\GRP-REGION-EMEA', 'CORP\GRP-CTX-ALLSTAFF')
     }
 }
 
@@ -211,10 +211,10 @@ Describe 'Get-CcbRecommendation' {
         $drift = $script:syntheticRecommendations | Where-Object Id -eq 'CCB005'
         $drift.CatalogUids | Should -Be @(3)
         @($drift.Evidence | ForEach-Object { "$($_.machine)|$($_.difference)|$($_.application)" }) | Should -Be @(
-            'CORP\VDI-ENG-004|Version|Google Chrome'
-            'CORP\VDI-ENG-007|Missing|Python 3.12.6 (64-bit)'
-            'CORP\VDI-ENG-007|Extra|Wireshark 4.2.6 x64'
-            'CORP\VDI-ENG-011|Version|Git')
+            'CORP\LISW11ENG004|Version|Google Chrome'
+            'CORP\LISW11ENG007|Missing|Python 3.12.6 (64-bit)'
+            'CORP\LISW11ENG007|Extra|Wireshark 4.2.6 x64'
+            'CORP\LISW11ENG011|Version|Git')
     }
 
     It 'reports disabled accounts that still have access' {
@@ -225,15 +225,34 @@ Describe 'Get-CcbRecommendation' {
 
     It 'reports the circular group by name' {
         ($script:syntheticRecommendations | Where-Object Id -eq 'CCB011').Evidence.cycle |
-            Should -Be 'CORP\GRP-Legacy-Apps > CORP\GRP-Legacy-Users > CORP\GRP-Legacy-Apps'
+            Should -Be 'CORP\GRP-LEGACY-APPS > CORP\GRP-LEGACY-USERS > CORP\GRP-LEGACY-APPS'
     }
 
     It 'applies the thresholds' {
         $recommendations = @(Get-CcbRecommendation -Snapshot $script:synthetic -Access $script:syntheticAccess -UnusedDays 90 -MinimumVdaVersion '1912' -MaxNestingDepth 5 -OverlapThreshold 1.0)
-        ($recommendations | Where-Object Id -eq 'CCB009').Evidence.machine | Should -Be @('CORP\VDI-ENG-009', 'CORP\VDI-ENG-012')
+        ($recommendations | Where-Object Id -eq 'CCB009').Evidence.machine | Should -Be @('CORP\LISW11ENG009', 'CORP\LISW11ENG012')
         $recommendations.Id | Should -Not -Contain 'CCB006'
         $recommendations.Id | Should -Not -Contain 'CCB010'
         @($recommendations | Where-Object Id -eq 'CCB003') | Should -HaveCount 1
+    }
+
+    It 'reports names outside the naming convention only when patterns are given' {
+        $script:syntheticRecommendations.Id | Should -Not -Contain 'CCB014'
+        $convention = @{
+            CatalogNamePattern = 'MC-[A-Z]{3}-(W10|W11|S22)-(POOL|DED|MS|RPC)-[A-Z0-9]+'
+            DeliveryGroupNamePattern = 'DG-[A-Z]{3}-(W10|W11|S22)-(POOL|DED|MS|RPC)-[A-Z0-9]+'
+            MachineNamePattern = '[A-Z]{3}(W10|W11|S22)[A-Z]{3}[0-9]{3}'
+        }
+        $naming = Get-CcbRecommendation -Snapshot $script:synthetic -Access $script:syntheticAccess @convention | Where-Object Id -eq 'CCB014'
+        @($naming.Evidence | ForEach-Object { "$($_.kind)|$($_.name)" }) | Should -Be @('catalog|Pilot W11 (temp)')
+        $naming.CatalogUids | Should -Be @(7)
+    }
+
+    It 'checks machine names without the domain prefix and rejects an invalid pattern' {
+        $site = Get-TestSite
+        $naming = Get-CcbRecommendation -Snapshot $site -MachineNamePattern 'POOL-[0-9]' | Where-Object Id -eq 'CCB014'
+        $naming.Evidence.name | Should -Be @('T\PC-1')
+        { Get-CcbRecommendation -Snapshot $site -CatalogNamePattern '([' } | Should -Throw '*catalog name pattern is not a valid regular expression*'
     }
 
     It 'stays quiet on a clean site' {
@@ -253,7 +272,7 @@ Describe 'Protect-CcbSnapshot' {
     It 'removes every user, group, and machine identity' {
         $script:protectedJson | Should -Not -Match 'CORP\\\\'
         $script:protectedJson | Should -Not -Match 'S-1-5-21'
-        $script:protectedJson | Should -Not -Match 'alves|Lisbon Site'
+        $script:protectedJson | Should -Not -Match 'alves|Lisbon'
         $script:protected.site.pseudonymized | Should -BeTrue
         @(Test-CcbSnapshot -Snapshot $script:protected) | Should -HaveCount 0
     }
@@ -271,8 +290,8 @@ Describe 'Protect-CcbSnapshot' {
     }
 
     It 'keeps catalog names unless asked to replace them' {
-        $script:protected.catalogs.name | Should -Contain 'W11-Pooled-General'
-        (Protect-CcbSnapshot -Snapshot $script:synthetic -Key $script:key -IncludeCatalogNames).catalogs.name | Should -Not -Contain 'W11-Pooled-General'
+        $script:protected.catalogs.name | Should -Contain 'MC-LIS-W11-POOL-GENERAL'
+        (Protect-CcbSnapshot -Snapshot $script:synthetic -Key $script:key -IncludeCatalogNames).catalogs.name | Should -Not -Contain 'MC-LIS-W11-POOL-GENERAL'
     }
 }
 
@@ -287,8 +306,8 @@ Describe 'New-CcbReport' {
         $report.kind | Should -Be 'citrix-catalog-baseline-report'
         $report.summary.catalogs | Should -Be 7
         $report.summary.machines | Should -Be 65
-        ($report.catalogs | Where-Object name -eq 'W11-Pooled-Pilot').machineCount | Should -Be 0
-        ($report.catalogs | Where-Object name -eq 'W11-Dedicated-Engineering').persistent | Should -BeTrue
+        ($report.catalogs | Where-Object name -eq 'Pilot W11 (temp)').machineCount | Should -Be 0
+        ($report.catalogs | Where-Object name -eq 'MC-LIS-W11-DED-ENGINEERING').persistent | Should -BeTrue
     }
 
     It 'keeps the committed demo data current' {

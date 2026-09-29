@@ -4,6 +4,10 @@ function New-CcbSyntheticSnapshot {
     Creates a deterministic, fully fictional site snapshot.
 
     .DESCRIPTION
+    Names follow the convention in docs/naming-convention.md (for example
+    MC-LIS-W11-POOL-FINANCE, DG-LIS-W11-POOL-FINANCE, LISW11FIN001), except a
+    pilot catalog created outside the process, which CCB014 reports.
+
     The synthetic site has seven machine catalogs, six delivery groups, 64
     users, nested and circular groups, persistent and pooled desktops, Remote
     PC Access, and software inventories. It deliberately contains one case for
@@ -77,39 +81,39 @@ function New-CcbSyntheticSnapshot {
         $groups[$Name] = [ordered]@{ sid = "$sidPrefix-$(3001 + $groups.Count)"; name = "$domain\$Name"; members = [System.Collections.Generic.List[string]]::new() }
     }
     foreach ($name in @(
-            'GRP-VDI-AllStaff', 'GRP-Region-EMEA', 'GRP-Region-Americas', 'GRP-Office-Lisbon', 'GRP-Office-Madrid',
-            'GRP-Team-Support-L2', 'GRP-Dept-Finance', 'GRP-Dept-Sales', 'GRP-Dept-HR', 'GRP-Dept-Engineering',
-            'GRP-Dept-Support', 'GRP-Dept-Operations', 'GRP-VDI-General', 'GRP-VDI-Finance', 'GRP-VDI-Engineering',
-            'GRP-Contractors', 'GRP-RemotePC-Users', 'GRP-Legacy-Apps', 'GRP-Legacy-Users')) {
+            'GRP-CTX-ALLSTAFF', 'GRP-REGION-EMEA', 'GRP-REGION-AMER', 'GRP-OFFICE-LISBON', 'GRP-OFFICE-MADRID',
+            'GRP-TEAM-SUPPORT-L2', 'GRP-DEPT-FINANCE', 'GRP-DEPT-SALES', 'GRP-DEPT-HR', 'GRP-DEPT-ENGINEERING',
+            'GRP-DEPT-SUPPORT', 'GRP-DEPT-OPERATIONS', 'GRP-CTX-GENERAL', 'GRP-CTX-FINANCE', 'GRP-CTX-ENGINEERING',
+            'GRP-CONTRACTORS', 'GRP-CTX-REMOTEPC', 'GRP-LEGACY-APPS', 'GRP-LEGACY-USERS')) {
         & $newGroup $name
     }
     $add = { param([string]$Group, [string[]]$Sids) foreach ($sid in $Sids) { $groups[$Group].members.Add($sid) } }
     $sidsOf = { param($List) @($List | ForEach-Object { $_.sid }) }
 
-    & $add 'GRP-Dept-Finance' (& $sidsOf $byDepartment['Finance'])
-    & $add 'GRP-Dept-Sales' (& $sidsOf $byDepartment['Sales'])
-    & $add 'GRP-Dept-HR' (& $sidsOf $byDepartment['HR'])
-    & $add 'GRP-Dept-Engineering' (& $sidsOf $byDepartment['Engineering'])
-    & $add 'GRP-Dept-Support' ((& $sidsOf $byDepartment['Support'][5..7]) + $groups['GRP-Team-Support-L2'].sid)
-    & $add 'GRP-Dept-Operations' (& $sidsOf $byDepartment['Operations'])
-    & $add 'GRP-Team-Support-L2' (& $sidsOf $supportL2)
-    & $add 'GRP-Contractors' (& $sidsOf $contractors)
+    & $add 'GRP-DEPT-FINANCE' (& $sidsOf $byDepartment['Finance'])
+    & $add 'GRP-DEPT-SALES' (& $sidsOf $byDepartment['Sales'])
+    & $add 'GRP-DEPT-HR' (& $sidsOf $byDepartment['HR'])
+    & $add 'GRP-DEPT-ENGINEERING' (& $sidsOf $byDepartment['Engineering'])
+    & $add 'GRP-DEPT-SUPPORT' ((& $sidsOf $byDepartment['Support'][5..7]) + $groups['GRP-TEAM-SUPPORT-L2'].sid)
+    & $add 'GRP-DEPT-OPERATIONS' (& $sidsOf $byDepartment['Operations'])
+    & $add 'GRP-TEAM-SUPPORT-L2' (& $sidsOf $supportL2)
+    & $add 'GRP-CONTRACTORS' (& $sidsOf $contractors)
 
-    # Five levels for the L2 team: user > Team-Support-L2 > Dept-Support > Office-Lisbon > Region-EMEA > VDI-AllStaff.
-    & $add 'GRP-Office-Lisbon' @($groups['GRP-Dept-Finance'].sid, $groups['GRP-Dept-HR'].sid, $groups['GRP-Dept-Support'].sid)
-    & $add 'GRP-Office-Madrid' @($groups['GRP-Dept-Sales'].sid, $groups['GRP-Dept-Operations'].sid)
-    & $add 'GRP-Region-EMEA' @($groups['GRP-Office-Lisbon'].sid, $groups['GRP-Office-Madrid'].sid)
-    & $add 'GRP-Region-Americas' @($groups['GRP-Dept-Engineering'].sid)
-    & $add 'GRP-VDI-AllStaff' @($groups['GRP-Region-EMEA'].sid, $groups['GRP-Region-Americas'].sid)
+    # Five levels for the L2 team: user > TEAM-SUPPORT-L2 > DEPT-SUPPORT > OFFICE-LISBON > REGION-EMEA > CTX-ALLSTAFF.
+    & $add 'GRP-OFFICE-LISBON' @($groups['GRP-DEPT-FINANCE'].sid, $groups['GRP-DEPT-HR'].sid, $groups['GRP-DEPT-SUPPORT'].sid)
+    & $add 'GRP-OFFICE-MADRID' @($groups['GRP-DEPT-SALES'].sid, $groups['GRP-DEPT-OPERATIONS'].sid)
+    & $add 'GRP-REGION-EMEA' @($groups['GRP-OFFICE-LISBON'].sid, $groups['GRP-OFFICE-MADRID'].sid)
+    & $add 'GRP-REGION-AMER' @($groups['GRP-DEPT-ENGINEERING'].sid)
+    & $add 'GRP-CTX-ALLSTAFF' @($groups['GRP-REGION-EMEA'].sid, $groups['GRP-REGION-AMER'].sid)
 
-    & $add 'GRP-VDI-General' @($groups['GRP-Dept-Sales'].sid, $groups['GRP-Dept-HR'].sid, $groups['GRP-Dept-Finance'].sid, $groups['GRP-Dept-Operations'].sid)
-    & $add 'GRP-VDI-Finance' @($groups['GRP-Dept-Finance'].sid)
-    & $add 'GRP-VDI-Engineering' @($groups['GRP-Dept-Engineering'].sid)
-    & $add 'GRP-RemotePC-Users' (& $sidsOf @($byDepartment['Operations'][0..7]))
+    & $add 'GRP-CTX-GENERAL' @($groups['GRP-DEPT-SALES'].sid, $groups['GRP-DEPT-HR'].sid, $groups['GRP-DEPT-FINANCE'].sid, $groups['GRP-DEPT-OPERATIONS'].sid)
+    & $add 'GRP-CTX-FINANCE' @($groups['GRP-DEPT-FINANCE'].sid)
+    & $add 'GRP-CTX-ENGINEERING' @($groups['GRP-DEPT-ENGINEERING'].sid)
+    & $add 'GRP-CTX-REMOTEPC' (& $sidsOf @($byDepartment['Operations'][0..7]))
 
     # Circular nesting left behind by an old migration.
-    & $add 'GRP-Legacy-Apps' @($groups['GRP-Legacy-Users'].sid)
-    & $add 'GRP-Legacy-Users' @($groups['GRP-Legacy-Apps'].sid, $byDepartment['Operations'][8].sid, $byDepartment['Operations'][9].sid)
+    & $add 'GRP-LEGACY-APPS' @($groups['GRP-LEGACY-USERS'].sid)
+    & $add 'GRP-LEGACY-USERS' @($groups['GRP-LEGACY-APPS'].sid, $byDepartment['Operations'][8].sid, $byDepartment['Operations'][9].sid)
 
     # ------------------------------------------------------------- software
     $app = { param([string]$Name, [string]$Version, [string]$Publisher) [ordered]@{ name = $Name; version = $Version; publisher = $Publisher } }
@@ -155,13 +159,13 @@ function New-CcbSyntheticSnapshot {
         [ordered]@{ uid = $Uid; name = $Name; provisioningType = $Provisioning; allocationType = $Allocation; persistUserChanges = $Persist; sessionSupport = $Session }
     }
     $catalogs = @(
-        & $catalog 1 'W11-Pooled-General' 'MCS' 'Random' 'Discard' 'SingleSession'
-        & $catalog 2 'W11-Pooled-Finance' 'MCS' 'Random' 'Discard' 'SingleSession'
-        & $catalog 3 'W11-Dedicated-Engineering' 'MCS' 'Static' 'OnLocal' 'SingleSession'
-        & $catalog 4 'WS2022-Shared-Desktop' 'MCS' 'Random' 'Discard' 'MultiSession'
-        & $catalog 5 'RemotePC-Lisbon' 'Manual' 'Static' 'OnLocal' 'SingleSession'
-        & $catalog 6 'W10-Legacy-Apps' 'MCS' 'Random' 'Discard' 'SingleSession'
-        & $catalog 7 'W11-Pooled-Pilot' 'MCS' 'Random' 'Discard' 'SingleSession'
+        & $catalog 1 'MC-LIS-W11-POOL-GENERAL' 'MCS' 'Random' 'Discard' 'SingleSession'
+        & $catalog 2 'MC-LIS-W11-POOL-FINANCE' 'MCS' 'Random' 'Discard' 'SingleSession'
+        & $catalog 3 'MC-LIS-W11-DED-ENGINEERING' 'MCS' 'Static' 'OnLocal' 'SingleSession'
+        & $catalog 4 'MC-LIS-S22-MS-SHARED' 'MCS' 'Random' 'Discard' 'MultiSession'
+        & $catalog 5 'MC-LIS-W11-RPC-OPERATIONS' 'Manual' 'Static' 'OnLocal' 'SingleSession'
+        & $catalog 6 'MC-LIS-W10-POOL-LEGACY' 'MCS' 'Random' 'Discard' 'SingleSession'
+        & $catalog 7 'Pilot W11 (temp)' 'MCS' 'Random' 'Discard' 'SingleSession'
     )
 
     # ------------------------------------------------------ delivery groups
@@ -181,37 +185,37 @@ function New-CcbSyntheticSnapshot {
 
     $deliveryGroups = @(
         [ordered]@{
-            uid = 1; name = 'General Desktops'; desktopKind = 'Shared'; enabled = $true
-            desktopRules = @(& $rule 'General Desktops_1' 'Entitlement' @(& $g 'GRP-VDI-General') @())
+            uid = 1; name = 'DG-LIS-W11-POOL-GENERAL'; desktopKind = 'Shared'; enabled = $true
+            desktopRules = @(& $rule 'DG-LIS-W11-POOL-GENERAL_1' 'Entitlement' @(& $g 'GRP-CTX-GENERAL') @())
             accessRules = @(
-                & $rule 'General Desktops_AG' $null @(& $g 'GRP-VDI-General') @()
-                & $rule 'General Desktops_Direct' $null @(& $g 'GRP-VDI-General') @()
+                & $rule 'DG-LIS-W11-POOL-GENERAL_AG' $null @(& $g 'GRP-CTX-GENERAL') @()
+                & $rule 'DG-LIS-W11-POOL-GENERAL_Direct' $null @(& $g 'GRP-CTX-GENERAL') @()
             )
         }
         [ordered]@{
-            uid = 2; name = 'Finance Desktops'; desktopKind = 'Shared'; enabled = $true
-            desktopRules = @(& $rule 'Finance Desktops_1' 'Entitlement' @((& $g 'GRP-VDI-Finance'), $directFinanceUser) @())
-            accessRules = @(& $rule 'Finance Desktops_AG' $null @(& $g 'GRP-VDI-AllStaff') @())
+            uid = 2; name = 'DG-LIS-W11-POOL-FINANCE'; desktopKind = 'Shared'; enabled = $true
+            desktopRules = @(& $rule 'DG-LIS-W11-POOL-FINANCE_1' 'Entitlement' @((& $g 'GRP-CTX-FINANCE'), $directFinanceUser) @())
+            accessRules = @(& $rule 'DG-LIS-W11-POOL-FINANCE_AG' $null @(& $g 'GRP-CTX-ALLSTAFF') @())
         }
         [ordered]@{
-            uid = 3; name = 'Engineering Workstations'; desktopKind = 'Private'; enabled = $true
-            desktopRules = @(& $rule 'Engineering Workstations_1' 'Assignment' @(& $g 'GRP-VDI-Engineering') @())
-            accessRules = @(& $rule 'Engineering Workstations_AG' $null @(& $g 'GRP-VDI-Engineering') @(& $g 'GRP-Contractors'))
+            uid = 3; name = 'DG-LIS-W11-DED-ENGINEERING'; desktopKind = 'Private'; enabled = $true
+            desktopRules = @(& $rule 'DG-LIS-W11-DED-ENGINEERING_1' 'Assignment' @(& $g 'GRP-CTX-ENGINEERING') @())
+            accessRules = @(& $rule 'DG-LIS-W11-DED-ENGINEERING_AG' $null @(& $g 'GRP-CTX-ENGINEERING') @(& $g 'GRP-CONTRACTORS'))
         }
         [ordered]@{
-            uid = 4; name = 'Shared Desktop'; desktopKind = 'Shared'; enabled = $true
-            desktopRules = @(& $rule 'Shared Desktop_1' 'Entitlement' @(& $g 'GRP-VDI-AllStaff') @())
-            accessRules = @(& $rule 'Shared Desktop_AG' $null @() @() $false)
+            uid = 4; name = 'DG-LIS-S22-MS-SHARED'; desktopKind = 'Shared'; enabled = $true
+            desktopRules = @(& $rule 'DG-LIS-S22-MS-SHARED_1' 'Entitlement' @(& $g 'GRP-CTX-ALLSTAFF') @())
+            accessRules = @(& $rule 'DG-LIS-S22-MS-SHARED_AG' $null @() @() $false)
         }
         [ordered]@{
-            uid = 5; name = 'Remote PC Access'; desktopKind = 'Private'; enabled = $true
-            desktopRules = @(& $rule 'Remote PC Access_1' 'Assignment' @(& $g 'GRP-RemotePC-Users') @())
-            accessRules = @(& $rule 'Remote PC Access_AG' $null @(& $g 'GRP-RemotePC-Users') @())
+            uid = 5; name = 'DG-LIS-W11-RPC-OPERATIONS'; desktopKind = 'Private'; enabled = $true
+            desktopRules = @(& $rule 'DG-LIS-W11-RPC-OPERATIONS_1' 'Assignment' @(& $g 'GRP-CTX-REMOTEPC') @())
+            accessRules = @(& $rule 'DG-LIS-W11-RPC-OPERATIONS_AG' $null @(& $g 'GRP-CTX-REMOTEPC') @())
         }
         [ordered]@{
-            uid = 6; name = 'Legacy Desktops (retired)'; desktopKind = 'Shared'; enabled = $false
-            desktopRules = @(& $rule 'Legacy Desktops_1' 'Entitlement' @(& $g 'GRP-Legacy-Apps') @())
-            accessRules = @(& $rule 'Legacy Desktops_AG' $null @(& $g 'GRP-Legacy-Apps') @())
+            uid = 6; name = 'DG-LIS-W10-POOL-LEGACY'; desktopKind = 'Shared'; enabled = $false
+            desktopRules = @(& $rule 'DG-LIS-W10-POOL-LEGACY_1' 'Entitlement' @(& $g 'GRP-LEGACY-APPS') @())
+            accessRules = @(& $rule 'DG-LIS-W10-POOL-LEGACY_AG' $null @(& $g 'GRP-LEGACY-APPS') @())
         }
     )
 
@@ -242,19 +246,19 @@ function New-CcbSyntheticSnapshot {
     for ($i = 1; $i -le 24; $i++) {
         $software = if ($i -eq 1) { & $copy $baseline.General } else { $null }
         $state = if ($i -eq 23) { 'Unregistered' } else { 'Registered' }
-        & $machine ('VDI-GEN-{0:000}' -f $i) 1 1 $vdaCurrent 'Windows 11' @() (& $daysAgo ($i % 3)) $software $state ($i -eq 24)
+        & $machine ('LISW11GEN{0:000}' -f $i) 1 1 $vdaCurrent 'Windows 11' @() (& $daysAgo ($i % 3)) $software $state ($i -eq 24)
     }
     for ($i = 1; $i -le 10; $i++) {
         $software = if ($i -eq 1) { & $copy $baseline.Finance } else { $null }
-        & $machine ('VDI-FIN-{0:000}' -f $i) 2 2 $vdaLtsr 'Windows 11' @() (& $daysAgo ($i % 2)) $software
+        & $machine ('LISW11FIN{0:000}' -f $i) 2 2 $vdaLtsr 'Windows 11' @() (& $daysAgo ($i % 2)) $software
     }
     for ($i = 1; $i -le 6; $i++) {
         $software = if ($i -eq 1) { & $copy $baseline.Shared } else { $null }
-        & $machine ('VDI-SHD-{0:000}' -f $i) 4 4 $vdaCurrent 'Windows Server 2022' @() (& $daysAgo 0) $software
+        & $machine ('LISS22SHD{0:000}' -f $i) 4 4 $vdaCurrent 'Windows Server 2022' @() (& $daysAgo 0) $software
     }
     for ($i = 1; $i -le 5; $i++) {
         $software = if ($i -eq 1) { & $copy $baseline.Legacy } else { $null }
-        & $machine ('VDI-LEG-{0:000}' -f $i) 6 $null $vdaEol 'Windows 10' @() (& $daysAgo (120 + $i)) $software
+        & $machine ('LISW10LEG{0:000}' -f $i) 6 $null $vdaEol 'Windows 10' @() (& $daysAgo (120 + $i)) $software
     }
 
     # Persistent engineering desktops: every machine is inventoried and three
@@ -275,7 +279,7 @@ function New-CcbSyntheticSnapshot {
             12 { $null }
             default { & $daysAgo ($i % 4) }
         }
-        & $machine ('VDI-ENG-{0:000}' -f $i) 3 3 $vdaCurrent 'Windows 11' @($owner.sid) $last @($software)
+        & $machine ('LISW11ENG{0:000}' -f $i) 3 3 $vdaCurrent 'Windows 11' @($owner.sid) $last @($software)
     }
 
     # Remote PC Access: physical desks in the Lisbon office.
@@ -284,13 +288,13 @@ function New-CcbSyntheticSnapshot {
         $agent = if ($i -le 2) { $vdaEol } else { $vdaLtsr }
         $state = if ($i -eq 8) { 'Unregistered' } else { 'Registered' }
         $software = if ($state -eq 'Registered') { & $copy $baseline.RemotePc } else { $null }
-        & $machine ('RPC-LIS-{0:000}' -f $i) 5 5 $agent 'Windows 11' @($owner.sid) (& $daysAgo ($i * 3)) $software $state
+        & $machine ('LISW11RPC{0:000}' -f $i) 5 5 $agent 'Windows 11' @($owner.sid) (& $daysAgo ($i * 3)) $software $state
     }
 
     $snapshot = [ordered]@{
         schemaVersion = $script:SchemaVersion
         site = [ordered]@{
-            name = 'Synthetic Lisbon Site'
+            name = 'LIS - Lisbon (synthetic)'
             collectedAt = & $iso $CollectedAt
             source = 'synthetic'
             collectorVersion = $script:ModuleVersion

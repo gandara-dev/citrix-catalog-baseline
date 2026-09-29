@@ -31,6 +31,10 @@ function New-CcbReport {
         [ValidateRange(0, 20)]
         [int]$MaxNestingDepth = 3,
 
+        [string]$CatalogNamePattern,
+        [string]$DeliveryGroupNamePattern,
+        [string]$MachineNamePattern,
+
         # Report timestamp. Defaults to the snapshot collection time so the same
         # snapshot always produces the same report.
         [Nullable[DateTimeOffset]]$GeneratedAt
@@ -46,6 +50,9 @@ function New-CcbReport {
             UnusedDays = $UnusedDays
             OverlapThreshold = $OverlapThreshold
             MaxNestingDepth = $MaxNestingDepth
+            CatalogNamePattern = $CatalogNamePattern
+            DeliveryGroupNamePattern = $DeliveryGroupNamePattern
+            MachineNamePattern = $MachineNamePattern
         }
         $recommendations = @(Get-CcbRecommendation -Snapshot $Snapshot -Access $access @settings)
 
@@ -192,6 +199,11 @@ function New-CcbReport {
                 unusedDays = $UnusedDays
                 overlapThreshold = $OverlapThreshold
                 maxNestingDepth = $MaxNestingDepth
+                namingConvention = [ordered]@{
+                    catalog = if ($CatalogNamePattern) { $CatalogNamePattern } else { $null }
+                    deliveryGroup = if ($DeliveryGroupNamePattern) { $DeliveryGroupNamePattern } else { $null }
+                    machine = if ($MachineNamePattern) { $MachineNamePattern } else { $null }
+                }
             }
             summary = [ordered]@{
                 catalogs = $catalogs.Count
