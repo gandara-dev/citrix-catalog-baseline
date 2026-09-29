@@ -27,7 +27,7 @@ jobs:
       - name: Test the page before publishing
         run: node --test tests/web/*.test.mjs
       - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site
 
