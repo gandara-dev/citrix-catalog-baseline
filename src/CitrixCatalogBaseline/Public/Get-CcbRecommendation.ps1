@@ -36,7 +36,14 @@ function Get-CcbRecommendation {
 
         # Access paths with more nested group levels than this are reported.
         [ValidateRange(0, 20)]
-        [int]$MaxNestingDepth = 3
+        [int]$MaxNestingDepth = 3,
+
+        # Naming convention checks (CCB014). Each is a regular expression that
+        # the whole name must match; leave a pattern empty to skip that check.
+        # Machine names are checked without the DOMAIN\ prefix.
+        [string]$CatalogNamePattern,
+        [string]$DeliveryGroupNamePattern,
+        [string]$MachineNamePattern
     )
 
     process {
@@ -306,6 +313,38 @@ function Get-CcbRecommendation {
                 'Remove the delivery group, or its rules, once the retirement is confirmed.' `
                 @($group.Group | ForEach-Object { $_.CatalogUids }) `
                 @($group.Group | Sort-Object UserName | ForEach-Object { & $row @{ user = $_.UserName; path = ($_.Path -join ' > ') } })
+        }
+
+        # CCB014 - names outside the naming convention.
+        $conventions = @(
+            @{ Kind = 'catalog'; Pattern = $CatalogNamePattern; Items = $catalogs }
+            @{ Kind = 'delivery group'; Pattern = $DeliveryGroupNamePattern; Items = @(Get-CcbList $Snapshot 'deliveryGroups' | Sort-Object { Get-CcbValue $_ 'name' }) }
+            @{ Kind = 'machine'; Pattern = $MachineNamePattern; Items = $machines }
+        )
+        $offNaming = [System.Collections.Generic.List[object]]::new()
+        $affected = [System.Collections.Generic.List[long]]::new()
+        foreach ($convention in $conventions) {
+            if ([string]::IsNullOrWhiteSpace($convention.Pattern)) { continue }
+            try {
+                $regex = [regex]::new("^(?:$($convention.Pattern))`$", [System.Text.RegularExpressions.RegexOptions]::CultureInvariant)
+            }
+            catch {
+                throw "The $($convention.Kind) name pattern is not a valid regular expression: $($_.Exception.Message)"
+            }
+            foreach ($item in $convention.Items) {
+                $name = [string](Get-CcbValue $item 'name')
+                $checked = if ($convention.Kind -eq 'machine') { $name.Split([char]92)[-1] } else { $name }
+                if ($regex.IsMatch($checked)) { continue }
+                $offNaming.Add((& $row @{ kind = $convention.Kind; name = $name; pattern = $convention.Pattern }))
+                if ($convention.Kind -eq 'catalog') { $affected.Add([long](Get-CcbValue $item 'uid')) }
+                if ($convention.Kind -eq 'machine') { $affected.Add([long](Get-CcbValue $item 'catalogUid')) }
+            }
+        }
+        if ($offNaming.Count) {
+            & $emit 'CCB014' 'NamingConvention' 'Low' `
+                "$($offNaming.Count) name(s) do not follow the naming convention" `
+                'Rename the objects, or record the exception. Consistent names keep catalogs, delivery groups, and machines traceable to their site, OS, and purpose.' `
+                @($affected) @($offNaming)
         }
 
         $order = @{ High = 0; Medium = 1; Low = 2; Info = 3 }

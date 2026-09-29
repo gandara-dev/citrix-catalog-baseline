@@ -59,19 +59,19 @@ test('CSV quotes separators and neutralizes formulas', () => {
 });
 
 test('recommendations can be narrowed to one catalog', () => {
-  const engineering = recommendationsFor(report, 'W11-Dedicated-Engineering').map((item) => item.id);
+  const engineering = recommendationsFor(report, 'MC-LIS-W11-DED-ENGINEERING').map((item) => item.id);
   assert.ok(engineering.includes('CCB005'));
   assert.ok(!engineering.includes('CCB006'));
   assert.equal(recommendationsFor(report).length, report.recommendations.length);
 });
 
 test('comparing catalogs lists shared users and software differences', () => {
-  const result = compareCatalogs(report, ['W11-Pooled-Finance', 'W11-Pooled-General']);
-  assert.deepEqual(result.catalogs, ['W11-Pooled-Finance', 'W11-Pooled-General']);
+  const result = compareCatalogs(report, ['MC-LIS-W11-POOL-FINANCE', 'MC-LIS-W11-POOL-GENERAL']);
+  assert.deepEqual(result.catalogs, ['MC-LIS-W11-POOL-FINANCE', 'MC-LIS-W11-POOL-GENERAL']);
   assert.equal(result.sharedByAll, 11);
   const chrome = result.software.find((row) => row.name === 'Google Chrome');
   assert.equal(chrome.differs, true);
-  assert.deepEqual(chrome.catalogs, { 'W11-Pooled-Finance': ['126.0.6478.183'], 'W11-Pooled-General': ['128.0.6613.138'] });
+  assert.deepEqual(chrome.catalogs, { 'MC-LIS-W11-POOL-FINANCE': ['126.0.6478.183'], 'MC-LIS-W11-POOL-GENERAL': ['128.0.6613.138'] });
   const sap = result.software.find((row) => row.name === 'SAP GUI for Windows');
   assert.equal(sap.missing, true);
   assert.equal(sap.differs, false);
@@ -79,16 +79,16 @@ test('comparing catalogs lists shared users and software differences', () => {
 });
 
 test('blocked entries never count as shared access', () => {
-  const result = compareCatalogs(report, ['W11-Dedicated-Engineering', 'WS2022-Shared-Desktop']);
+  const result = compareCatalogs(report, ['MC-LIS-W11-DED-ENGINEERING', 'MC-LIS-S22-MS-SHARED']);
   const contractor = result.users.find((row) => row.user === 'CORP\\karin.duarte');
-  assert.deepEqual(Object.keys(contractor.catalogs), ['WS2022-Shared-Desktop']);
+  assert.deepEqual(Object.keys(contractor.catalogs), ['MC-LIS-S22-MS-SHARED']);
 });
 
 test('user lookup returns every path for matching users', () => {
   const [user] = lookupUsers(report, 'diego esteves');
   assert.equal(user.name, 'CORP\\diego.esteves');
   assert.equal(user.enabled, false);
-  assert.deepEqual(user.entries.map((entry) => entry.catalog).sort(), ['W11-Dedicated-Engineering', 'WS2022-Shared-Desktop']);
-  assert.equal(user.entries.find((entry) => entry.catalog === 'W11-Dedicated-Engineering').machine, 'CORP\\VDI-ENG-006');
+  assert.deepEqual(user.entries.map((entry) => entry.catalog).sort(), ['MC-LIS-S22-MS-SHARED', 'MC-LIS-W11-DED-ENGINEERING']);
+  assert.equal(user.entries.find((entry) => entry.catalog === 'MC-LIS-W11-DED-ENGINEERING').machine, 'CORP\\LISW11ENG006');
   assert.deepEqual(lookupUsers(report, ''), []);
 });

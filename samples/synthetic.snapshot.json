@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "site": {
-    "name": "Synthetic Lisbon Site",
+    "name": "LIS - Lisbon (synthetic)",
     "collectedAt": "2026-09-28T12:00:00Z",
     "source": "synthetic",
-    "collectorVersion": "0.1.0",
+    "collectorVersion": "0.2.0",
     "pseudonymized": false
   },
   "directory": {
@@ -397,7 +397,7 @@
     "groups": [
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3001",
-        "name": "CORP\\GRP-VDI-AllStaff",
+        "name": "CORP\\GRP-CTX-ALLSTAFF",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-3002",
           "S-1-5-21-1004336348-1177238915-682003330-3003"
@@ -405,7 +405,7 @@
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3002",
-        "name": "CORP\\GRP-Region-EMEA",
+        "name": "CORP\\GRP-REGION-EMEA",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-3004",
           "S-1-5-21-1004336348-1177238915-682003330-3005"
@@ -413,14 +413,14 @@
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3003",
-        "name": "CORP\\GRP-Region-Americas",
+        "name": "CORP\\GRP-REGION-AMER",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-3010"
         ]
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3004",
-        "name": "CORP\\GRP-Office-Lisbon",
+        "name": "CORP\\GRP-OFFICE-LISBON",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-3007",
           "S-1-5-21-1004336348-1177238915-682003330-3009",
@@ -429,7 +429,7 @@
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3005",
-        "name": "CORP\\GRP-Office-Madrid",
+        "name": "CORP\\GRP-OFFICE-MADRID",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-3008",
           "S-1-5-21-1004336348-1177238915-682003330-3012"
@@ -437,7 +437,7 @@
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3006",
-        "name": "CORP\\GRP-Team-Support-L2",
+        "name": "CORP\\GRP-TEAM-SUPPORT-L2",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-2045",
           "S-1-5-21-1004336348-1177238915-682003330-2046",
@@ -448,7 +448,7 @@
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3007",
-        "name": "CORP\\GRP-Dept-Finance",
+        "name": "CORP\\GRP-DEPT-FINANCE",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-2001",
           "S-1-5-21-1004336348-1177238915-682003330-2002",
@@ -464,7 +464,7 @@
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3008",
-        "name": "CORP\\GRP-Dept-Sales",
+        "name": "CORP\\GRP-DEPT-SALES",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-2011",
           "S-1-5-21-1004336348-1177238915-682003330-2012",
@@ -484,7 +484,7 @@
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3009",
-        "name": "CORP\\GRP-Dept-HR",
+        "name": "CORP\\GRP-DEPT-HR",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-2025",
           "S-1-5-21-1004336348-1177238915-682003330-2026",
@@ -496,7 +496,7 @@
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3010",
-        "name": "CORP\\GRP-Dept-Engineering",
+        "name": "CORP\\GRP-DEPT-ENGINEERING",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-2031",
           "S-1-5-21-1004336348-1177238915-682003330-2032",
@@ -516,7 +516,7 @@
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3011",
-        "name": "CORP\\GRP-Dept-Support",
+        "name": "CORP\\GRP-DEPT-SUPPORT",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-2050",
           "S-1-5-21-1004336348-1177238915-682003330-2051",
@@ -526,7 +526,7 @@
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3012",
-        "name": "CORP\\GRP-Dept-Operations",
+        "name": "CORP\\GRP-DEPT-OPERATIONS",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-2053",
           "S-1-5-21-1004336348-1177238915-682003330-2054",
@@ -544,7 +544,7 @@
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3013",
-        "name": "CORP\\GRP-VDI-General",
+        "name": "CORP\\GRP-CTX-GENERAL",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-3008",
           "S-1-5-21-1004336348-1177238915-682003330-3009",
@@ -554,21 +554,21 @@
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3014",
-        "name": "CORP\\GRP-VDI-Finance",
+        "name": "CORP\\GRP-CTX-FINANCE",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-3007"
         ]
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3015",
-        "name": "CORP\\GRP-VDI-Engineering",
+        "name": "CORP\\GRP-CTX-ENGINEERING",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-3010"
         ]
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3016",
-        "name": "CORP\\GRP-Contractors",
+        "name": "CORP\\GRP-CONTRACTORS",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-2043",
           "S-1-5-21-1004336348-1177238915-682003330-2044"
@@ -576,7 +576,7 @@
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3017",
-        "name": "CORP\\GRP-RemotePC-Users",
+        "name": "CORP\\GRP-CTX-REMOTEPC",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-2053",
           "S-1-5-21-1004336348-1177238915-682003330-2054",
@@ -590,14 +590,14 @@
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3018",
-        "name": "CORP\\GRP-Legacy-Apps",
+        "name": "CORP\\GRP-LEGACY-APPS",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-3019"
         ]
       },
       {
         "sid": "S-1-5-21-1004336348-1177238915-682003330-3019",
-        "name": "CORP\\GRP-Legacy-Users",
+        "name": "CORP\\GRP-LEGACY-USERS",
         "members": [
           "S-1-5-21-1004336348-1177238915-682003330-3018",
           "S-1-5-21-1004336348-1177238915-682003330-2061",
@@ -609,7 +609,7 @@
   "catalogs": [
     {
       "uid": 1,
-      "name": "W11-Pooled-General",
+      "name": "MC-LIS-W11-POOL-GENERAL",
       "provisioningType": "MCS",
       "allocationType": "Random",
       "persistUserChanges": "Discard",
@@ -617,7 +617,7 @@
     },
     {
       "uid": 2,
-      "name": "W11-Pooled-Finance",
+      "name": "MC-LIS-W11-POOL-FINANCE",
       "provisioningType": "MCS",
       "allocationType": "Random",
       "persistUserChanges": "Discard",
@@ -625,7 +625,7 @@
     },
     {
       "uid": 3,
-      "name": "W11-Dedicated-Engineering",
+      "name": "MC-LIS-W11-DED-ENGINEERING",
       "provisioningType": "MCS",
       "allocationType": "Static",
       "persistUserChanges": "OnLocal",
@@ -633,7 +633,7 @@
     },
     {
       "uid": 4,
-      "name": "WS2022-Shared-Desktop",
+      "name": "MC-LIS-S22-MS-SHARED",
       "provisioningType": "MCS",
       "allocationType": "Random",
       "persistUserChanges": "Discard",
@@ -641,7 +641,7 @@
     },
     {
       "uid": 5,
-      "name": "RemotePC-Lisbon",
+      "name": "MC-LIS-W11-RPC-OPERATIONS",
       "provisioningType": "Manual",
       "allocationType": "Static",
       "persistUserChanges": "OnLocal",
@@ -649,7 +649,7 @@
     },
     {
       "uid": 6,
-      "name": "W10-Legacy-Apps",
+      "name": "MC-LIS-W10-POOL-LEGACY",
       "provisioningType": "MCS",
       "allocationType": "Random",
       "persistUserChanges": "Discard",
@@ -657,7 +657,7 @@
     },
     {
       "uid": 7,
-      "name": "W11-Pooled-Pilot",
+      "name": "Pilot W11 (temp)",
       "provisioningType": "MCS",
       "allocationType": "Random",
       "persistUserChanges": "Discard",
@@ -667,12 +667,12 @@
   "deliveryGroups": [
     {
       "uid": 1,
-      "name": "General Desktops",
+      "name": "DG-LIS-W11-POOL-GENERAL",
       "desktopKind": "Shared",
       "enabled": true,
       "desktopRules": [
         {
-          "name": "General Desktops_1",
+          "name": "DG-LIS-W11-POOL-GENERAL_1",
           "kind": "Entitlement",
           "enabled": true,
           "includedUserFilterEnabled": true,
@@ -685,7 +685,7 @@
       ],
       "accessRules": [
         {
-          "name": "General Desktops_AG",
+          "name": "DG-LIS-W11-POOL-GENERAL_AG",
           "enabled": true,
           "includedUserFilterEnabled": true,
           "includedUsers": [
@@ -695,7 +695,7 @@
           "excludedUsers": []
         },
         {
-          "name": "General Desktops_Direct",
+          "name": "DG-LIS-W11-POOL-GENERAL_Direct",
           "enabled": true,
           "includedUserFilterEnabled": true,
           "includedUsers": [
@@ -708,12 +708,12 @@
     },
     {
       "uid": 2,
-      "name": "Finance Desktops",
+      "name": "DG-LIS-W11-POOL-FINANCE",
       "desktopKind": "Shared",
       "enabled": true,
       "desktopRules": [
         {
-          "name": "Finance Desktops_1",
+          "name": "DG-LIS-W11-POOL-FINANCE_1",
           "kind": "Entitlement",
           "enabled": true,
           "includedUserFilterEnabled": true,
@@ -727,7 +727,7 @@
       ],
       "accessRules": [
         {
-          "name": "Finance Desktops_AG",
+          "name": "DG-LIS-W11-POOL-FINANCE_AG",
           "enabled": true,
           "includedUserFilterEnabled": true,
           "includedUsers": [
@@ -740,12 +740,12 @@
     },
     {
       "uid": 3,
-      "name": "Engineering Workstations",
+      "name": "DG-LIS-W11-DED-ENGINEERING",
       "desktopKind": "Private",
       "enabled": true,
       "desktopRules": [
         {
-          "name": "Engineering Workstations_1",
+          "name": "DG-LIS-W11-DED-ENGINEERING_1",
           "kind": "Assignment",
           "enabled": true,
           "includedUserFilterEnabled": true,
@@ -758,7 +758,7 @@
       ],
       "accessRules": [
         {
-          "name": "Engineering Workstations_AG",
+          "name": "DG-LIS-W11-DED-ENGINEERING_AG",
           "enabled": true,
           "includedUserFilterEnabled": true,
           "includedUsers": [
@@ -773,12 +773,12 @@
     },
     {
       "uid": 4,
-      "name": "Shared Desktop",
+      "name": "DG-LIS-S22-MS-SHARED",
       "desktopKind": "Shared",
       "enabled": true,
       "desktopRules": [
         {
-          "name": "Shared Desktop_1",
+          "name": "DG-LIS-S22-MS-SHARED_1",
           "kind": "Entitlement",
           "enabled": true,
           "includedUserFilterEnabled": true,
@@ -791,7 +791,7 @@
       ],
       "accessRules": [
         {
-          "name": "Shared Desktop_AG",
+          "name": "DG-LIS-S22-MS-SHARED_AG",
           "enabled": true,
           "includedUserFilterEnabled": false,
           "includedUsers": [],
@@ -802,12 +802,12 @@
     },
     {
       "uid": 5,
-      "name": "Remote PC Access",
+      "name": "DG-LIS-W11-RPC-OPERATIONS",
       "desktopKind": "Private",
       "enabled": true,
       "desktopRules": [
         {
-          "name": "Remote PC Access_1",
+          "name": "DG-LIS-W11-RPC-OPERATIONS_1",
           "kind": "Assignment",
           "enabled": true,
           "includedUserFilterEnabled": true,
@@ -820,7 +820,7 @@
       ],
       "accessRules": [
         {
-          "name": "Remote PC Access_AG",
+          "name": "DG-LIS-W11-RPC-OPERATIONS_AG",
           "enabled": true,
           "includedUserFilterEnabled": true,
           "includedUsers": [
@@ -833,12 +833,12 @@
     },
     {
       "uid": 6,
-      "name": "Legacy Desktops (retired)",
+      "name": "DG-LIS-W10-POOL-LEGACY",
       "desktopKind": "Shared",
       "enabled": false,
       "desktopRules": [
         {
-          "name": "Legacy Desktops_1",
+          "name": "DG-LIS-W10-POOL-LEGACY_1",
           "kind": "Entitlement",
           "enabled": true,
           "includedUserFilterEnabled": true,
@@ -851,7 +851,7 @@
       ],
       "accessRules": [
         {
-          "name": "Legacy Desktops_AG",
+          "name": "DG-LIS-W10-POOL-LEGACY_AG",
           "enabled": true,
           "includedUserFilterEnabled": true,
           "includedUsers": [
@@ -865,7 +865,7 @@
   ],
   "machines": [
     {
-      "name": "CORP\\VDI-GEN-001",
+      "name": "CORP\\LISW11GEN001",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -918,7 +918,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-GEN-002",
+      "name": "CORP\\LISW11GEN002",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -930,7 +930,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-003",
+      "name": "CORP\\LISW11GEN003",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -942,7 +942,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-004",
+      "name": "CORP\\LISW11GEN004",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -954,7 +954,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-005",
+      "name": "CORP\\LISW11GEN005",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -966,7 +966,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-006",
+      "name": "CORP\\LISW11GEN006",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -978,7 +978,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-007",
+      "name": "CORP\\LISW11GEN007",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -990,7 +990,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-008",
+      "name": "CORP\\LISW11GEN008",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1002,7 +1002,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-009",
+      "name": "CORP\\LISW11GEN009",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1014,7 +1014,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-010",
+      "name": "CORP\\LISW11GEN010",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1026,7 +1026,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-011",
+      "name": "CORP\\LISW11GEN011",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1038,7 +1038,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-012",
+      "name": "CORP\\LISW11GEN012",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1050,7 +1050,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-013",
+      "name": "CORP\\LISW11GEN013",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1062,7 +1062,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-014",
+      "name": "CORP\\LISW11GEN014",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1074,7 +1074,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-015",
+      "name": "CORP\\LISW11GEN015",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1086,7 +1086,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-016",
+      "name": "CORP\\LISW11GEN016",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1098,7 +1098,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-017",
+      "name": "CORP\\LISW11GEN017",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1110,7 +1110,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-018",
+      "name": "CORP\\LISW11GEN018",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1122,7 +1122,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-019",
+      "name": "CORP\\LISW11GEN019",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1134,7 +1134,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-020",
+      "name": "CORP\\LISW11GEN020",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1146,7 +1146,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-021",
+      "name": "CORP\\LISW11GEN021",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1158,7 +1158,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-022",
+      "name": "CORP\\LISW11GEN022",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1170,7 +1170,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-023",
+      "name": "CORP\\LISW11GEN023",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1182,7 +1182,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-GEN-024",
+      "name": "CORP\\LISW11GEN024",
       "catalogUid": 1,
       "deliveryGroupUid": 1,
       "agentVersion": "2402.0.100.629",
@@ -1194,7 +1194,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-FIN-001",
+      "name": "CORP\\LISW11FIN001",
       "catalogUid": 2,
       "deliveryGroupUid": 2,
       "agentVersion": "2203.0.3000.3052",
@@ -1257,7 +1257,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-FIN-002",
+      "name": "CORP\\LISW11FIN002",
       "catalogUid": 2,
       "deliveryGroupUid": 2,
       "agentVersion": "2203.0.3000.3052",
@@ -1269,7 +1269,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-FIN-003",
+      "name": "CORP\\LISW11FIN003",
       "catalogUid": 2,
       "deliveryGroupUid": 2,
       "agentVersion": "2203.0.3000.3052",
@@ -1281,7 +1281,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-FIN-004",
+      "name": "CORP\\LISW11FIN004",
       "catalogUid": 2,
       "deliveryGroupUid": 2,
       "agentVersion": "2203.0.3000.3052",
@@ -1293,7 +1293,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-FIN-005",
+      "name": "CORP\\LISW11FIN005",
       "catalogUid": 2,
       "deliveryGroupUid": 2,
       "agentVersion": "2203.0.3000.3052",
@@ -1305,7 +1305,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-FIN-006",
+      "name": "CORP\\LISW11FIN006",
       "catalogUid": 2,
       "deliveryGroupUid": 2,
       "agentVersion": "2203.0.3000.3052",
@@ -1317,7 +1317,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-FIN-007",
+      "name": "CORP\\LISW11FIN007",
       "catalogUid": 2,
       "deliveryGroupUid": 2,
       "agentVersion": "2203.0.3000.3052",
@@ -1329,7 +1329,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-FIN-008",
+      "name": "CORP\\LISW11FIN008",
       "catalogUid": 2,
       "deliveryGroupUid": 2,
       "agentVersion": "2203.0.3000.3052",
@@ -1341,7 +1341,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-FIN-009",
+      "name": "CORP\\LISW11FIN009",
       "catalogUid": 2,
       "deliveryGroupUid": 2,
       "agentVersion": "2203.0.3000.3052",
@@ -1353,7 +1353,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-FIN-010",
+      "name": "CORP\\LISW11FIN010",
       "catalogUid": 2,
       "deliveryGroupUid": 2,
       "agentVersion": "2203.0.3000.3052",
@@ -1365,7 +1365,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-SHD-001",
+      "name": "CORP\\LISS22SHD001",
       "catalogUid": 4,
       "deliveryGroupUid": 4,
       "agentVersion": "2402.0.100.629",
@@ -1418,7 +1418,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-SHD-002",
+      "name": "CORP\\LISS22SHD002",
       "catalogUid": 4,
       "deliveryGroupUid": 4,
       "agentVersion": "2402.0.100.629",
@@ -1430,7 +1430,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-SHD-003",
+      "name": "CORP\\LISS22SHD003",
       "catalogUid": 4,
       "deliveryGroupUid": 4,
       "agentVersion": "2402.0.100.629",
@@ -1442,7 +1442,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-SHD-004",
+      "name": "CORP\\LISS22SHD004",
       "catalogUid": 4,
       "deliveryGroupUid": 4,
       "agentVersion": "2402.0.100.629",
@@ -1454,7 +1454,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-SHD-005",
+      "name": "CORP\\LISS22SHD005",
       "catalogUid": 4,
       "deliveryGroupUid": 4,
       "agentVersion": "2402.0.100.629",
@@ -1466,7 +1466,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-SHD-006",
+      "name": "CORP\\LISS22SHD006",
       "catalogUid": 4,
       "deliveryGroupUid": 4,
       "agentVersion": "2402.0.100.629",
@@ -1478,7 +1478,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-LEG-001",
+      "name": "CORP\\LISW10LEG001",
       "catalogUid": 6,
       "deliveryGroupUid": null,
       "agentVersion": "1912.0.9000.26",
@@ -1516,7 +1516,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-LEG-002",
+      "name": "CORP\\LISW10LEG002",
       "catalogUid": 6,
       "deliveryGroupUid": null,
       "agentVersion": "1912.0.9000.26",
@@ -1528,7 +1528,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-LEG-003",
+      "name": "CORP\\LISW10LEG003",
       "catalogUid": 6,
       "deliveryGroupUid": null,
       "agentVersion": "1912.0.9000.26",
@@ -1540,7 +1540,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-LEG-004",
+      "name": "CORP\\LISW10LEG004",
       "catalogUid": 6,
       "deliveryGroupUid": null,
       "agentVersion": "1912.0.9000.26",
@@ -1552,7 +1552,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-LEG-005",
+      "name": "CORP\\LISW10LEG005",
       "catalogUid": 6,
       "deliveryGroupUid": null,
       "agentVersion": "1912.0.9000.26",
@@ -1564,7 +1564,7 @@
       "software": null
     },
     {
-      "name": "CORP\\VDI-ENG-001",
+      "name": "CORP\\LISW11ENG001",
       "catalogUid": 3,
       "deliveryGroupUid": 3,
       "agentVersion": "2402.0.100.629",
@@ -1629,7 +1629,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-ENG-002",
+      "name": "CORP\\LISW11ENG002",
       "catalogUid": 3,
       "deliveryGroupUid": 3,
       "agentVersion": "2402.0.100.629",
@@ -1694,7 +1694,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-ENG-003",
+      "name": "CORP\\LISW11ENG003",
       "catalogUid": 3,
       "deliveryGroupUid": 3,
       "agentVersion": "2402.0.100.629",
@@ -1759,7 +1759,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-ENG-004",
+      "name": "CORP\\LISW11ENG004",
       "catalogUid": 3,
       "deliveryGroupUid": 3,
       "agentVersion": "2402.0.100.629",
@@ -1824,7 +1824,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-ENG-005",
+      "name": "CORP\\LISW11ENG005",
       "catalogUid": 3,
       "deliveryGroupUid": 3,
       "agentVersion": "2402.0.100.629",
@@ -1889,7 +1889,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-ENG-006",
+      "name": "CORP\\LISW11ENG006",
       "catalogUid": 3,
       "deliveryGroupUid": 3,
       "agentVersion": "2402.0.100.629",
@@ -1954,7 +1954,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-ENG-007",
+      "name": "CORP\\LISW11ENG007",
       "catalogUid": 3,
       "deliveryGroupUid": 3,
       "agentVersion": "2402.0.100.629",
@@ -2019,7 +2019,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-ENG-008",
+      "name": "CORP\\LISW11ENG008",
       "catalogUid": 3,
       "deliveryGroupUid": 3,
       "agentVersion": "2402.0.100.629",
@@ -2084,7 +2084,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-ENG-009",
+      "name": "CORP\\LISW11ENG009",
       "catalogUid": 3,
       "deliveryGroupUid": 3,
       "agentVersion": "2402.0.100.629",
@@ -2149,7 +2149,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-ENG-010",
+      "name": "CORP\\LISW11ENG010",
       "catalogUid": 3,
       "deliveryGroupUid": 3,
       "agentVersion": "2402.0.100.629",
@@ -2214,7 +2214,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-ENG-011",
+      "name": "CORP\\LISW11ENG011",
       "catalogUid": 3,
       "deliveryGroupUid": 3,
       "agentVersion": "2402.0.100.629",
@@ -2279,7 +2279,7 @@
       ]
     },
     {
-      "name": "CORP\\VDI-ENG-012",
+      "name": "CORP\\LISW11ENG012",
       "catalogUid": 3,
       "deliveryGroupUid": 3,
       "agentVersion": "2402.0.100.629",
@@ -2344,7 +2344,7 @@
       ]
     },
     {
-      "name": "CORP\\RPC-LIS-001",
+      "name": "CORP\\LISW11RPC001",
       "catalogUid": 5,
       "deliveryGroupUid": 5,
       "agentVersion": "1912.0.9000.26",
@@ -2389,7 +2389,7 @@
       ]
     },
     {
-      "name": "CORP\\RPC-LIS-002",
+      "name": "CORP\\LISW11RPC002",
       "catalogUid": 5,
       "deliveryGroupUid": 5,
       "agentVersion": "1912.0.9000.26",
@@ -2434,7 +2434,7 @@
       ]
     },
     {
-      "name": "CORP\\RPC-LIS-003",
+      "name": "CORP\\LISW11RPC003",
       "catalogUid": 5,
       "deliveryGroupUid": 5,
       "agentVersion": "2203.0.3000.3052",
@@ -2479,7 +2479,7 @@
       ]
     },
     {
-      "name": "CORP\\RPC-LIS-004",
+      "name": "CORP\\LISW11RPC004",
       "catalogUid": 5,
       "deliveryGroupUid": 5,
       "agentVersion": "2203.0.3000.3052",
@@ -2524,7 +2524,7 @@
       ]
     },
     {
-      "name": "CORP\\RPC-LIS-005",
+      "name": "CORP\\LISW11RPC005",
       "catalogUid": 5,
       "deliveryGroupUid": 5,
       "agentVersion": "2203.0.3000.3052",
@@ -2569,7 +2569,7 @@
       ]
     },
     {
-      "name": "CORP\\RPC-LIS-006",
+      "name": "CORP\\LISW11RPC006",
       "catalogUid": 5,
       "deliveryGroupUid": 5,
       "agentVersion": "2203.0.3000.3052",
@@ -2614,7 +2614,7 @@
       ]
     },
     {
-      "name": "CORP\\RPC-LIS-007",
+      "name": "CORP\\LISW11RPC007",
       "catalogUid": 5,
       "deliveryGroupUid": 5,
       "agentVersion": "2203.0.3000.3052",
@@ -2659,7 +2659,7 @@
       ]
     },
     {
-      "name": "CORP\\RPC-LIS-008",
+      "name": "CORP\\LISW11RPC008",
       "catalogUid": 5,
       "deliveryGroupUid": 5,
       "agentVersion": "2203.0.3000.3052",

@@ -5,27 +5,28 @@ import {
   filterRows,
   lookupUsers,
   recommendationsFor,
-  severityCounts,
   toCsv,
   validateReport,
 } from './lib/review.js';
 
 const $ = (id) => document.getElementById(id);
-const state = { report: null, compare: new Set(), filters: {} };
+const state = { report: null, checked: new Set(), sort: {}, listFilter: '' };
 
-// Everything in the report came from a file the user opened: escape it all.
+// Everything in a report came from a file the user opened: escape it all.
 const e = (value) => String(value ?? '')
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-const plural = (count, word) => `${count} ${word}${count === 1 ? '' : 's'}`;
-const shortDate = (iso) => (iso ? iso.replace('T', ' ').replace(/:\d\dZ$/, ' UTC') : '');
+const plural = (count, word, many = `${word}s`) => `${count} ${count === 1 ? word : many}`;
+const shortDate = (iso) => (iso ? iso.slice(0, 16).replace('T', ' ') : '');
+const short = (name) => String(name || '').replace(/^[^\\]+\\/, '');
+const severityRank = (severity) => SEVERITIES.indexOf(severity);
 
 function notice(message) {
   $('notice').textContent = message || '';
   $('notice').hidden = !message;
 }
 
-function download(name, content, type = 'text/csv') {
-  const url = URL.createObjectURL(new Blob([content], { type }));
+function download(name, content) {
+  const url = URL.createObjectURL(new Blob([content], { type: 'text/csv' }));
   const link = document.createElement('a');
   link.href = url;
   link.download = name;
@@ -33,350 +34,492 @@ function download(name, content, type = 'text/csv') {
   URL.revokeObjectURL(url);
 }
 
-// ------------------------------------------------------------------ tables
+// ------------------------------------------------------------------ plain-language access
 
-// A filterable table with a row count and CSV export. Columns declare a label,
-// a plain value (for filtering and CSV), and optionally escaped HTML.
-function table(container, { id, columns, rows, placeholder = 'filter…', csvName, extra = '', rowClass }) {
-  const filterKey = `${location.hash}|${id}`;
-  container.insertAdjacentHTML('beforeend', `
-    <div class="toolbar">
-      <input type="search" placeholder="${e(placeholder)}" value="${e(state.filters[filterKey] || '')}" aria-label="Filter rows">
-      ${extra}
-      <span class="shown"></span>
-      <span class="grow"></span>
-      <button type="button" data-csv>CSV</button>
-    </div>
-    <div class="table-wrap"><table class="grid"><thead><tr>${columns.map((column) =>
-      `<th class="${column.num ? 'num' : ''}">${e(column.label)}</th>`).join('')}</tr></thead><tbody></tbody></table></div>`);
-  const toolbar = container.lastElementChild.previousElementSibling;
-  const input = toolbar.querySelector('input');
-  const body = container.lastElementChild.querySelector('tbody');
-  const plain = (column, row) => (column.value ? column.value(row) : row[column.key]);
-  const render = () => {
-    const visible = filterRows(rows.map((row) => ({ row, ...Object.fromEntries(columns.map((column, index) => [index, plain(column, row)])) })),
-      input.value, columns.map((column, index) => index)).map((item) => item.row);
-    body.innerHTML = visible.map((row) => `<tr class="${rowClass ? e(rowClass(row)) : ''}">${columns.map((column) =>
-      `<td class="${column.className || ''}">${column.html ? column.html(row) : e(plain(column, row))}</td>`).join('')}</tr>`).join('')
-      || `<tr><td colspan="${columns.length}" class="dim">No rows.</td></tr>`;
-    toolbar.querySelector('.shown').textContent = `${visible.length} of ${rows.length}`;
-    return visible;
-  };
-  input.addEventListener('input', () => {
-    state.filters[filterKey] = input.value;
-    render();
+// Explains one access entry the way an admin would say it.
+function why(entry) {
+  const path = entry.path || [];
+  let text;
+  if (entry.grantedBy === 'Machine assignment') {
+    text = `Assigned to <b>${e(short(entry.machine))}</b>`;
+  } else if (path[1] === '(all users)') {
+    text = `Rule <b>${e(entry.desktopRule)}</b> includes all users`;
+  } else if (path.length <= 1) {
+    text = `Named directly in rule <b>${e(entry.desktopRule)}</b>`;
+  } else {
+    const groups = path.slice(1).map((group) => `<b>${e(short(group))}</b>`);
+    text = `Member of ${groups[0]}${groups.slice(1).map((group) => `, which is in ${group}`).join('')}; entitled by <b>${e(entry.desktopRule)}</b>`;
+  }
+  if (entry.machine && entry.grantedBy !== 'Machine assignment') text += `; machine <b>${e(short(entry.machine))}</b>`;
+  if (entry.status === 'BlockedByAccessPolicy') text += ' — <span class="state-warn">blocked: no access policy rule allows the connection</span>';
+  if (entry.status === 'DeliveryGroupDisabled') text += ' — <span class="state-warn">delivery group is disabled</span>';
+  return text;
+}
+const whyText = (entry) => why(entry).replace(/<[^>]+>/g, '');
+const statusCell = (status) => (status === 'Granted' ? '<span class="state-ok">Allowed</span>'
+  : status === 'BlockedByAccessPolicy' ? '<span class="state-warn">Blocked</span>' : '<span class="state-warn">Group disabled</span>');
+const accountCell = (enabled) => (enabled === false ? '<span class="state-bad">Disabled</span>' : 'Enabled');
+
+// ------------------------------------------------------------------ grids
+
+function sortRows(key, columns, rows) {
+  const sort = state.sort[key];
+  if (!sort) return rows;
+  const column = columns[sort.index];
+  if (!column) return rows;
+  const value = (row) => (column.sort ? column.sort(row) : column.value(row));
+  return [...rows].sort((a, b) => {
+    const x = value(a);
+    const y = value(b);
+    const result = typeof x === 'number' && typeof y === 'number' ? x - y : String(x ?? '').localeCompare(String(y ?? ''), undefined, { numeric: true });
+    return sort.desc ? -result : result;
   });
-  toolbar.querySelector('[data-csv]').addEventListener('click', () => {
-    download(csvName, toCsv(columns.map((column) => ({ label: column.label, value: (row) => plain(column, row) })), render()));
-  });
-  render();
-  return toolbar;
 }
 
-const pathHtml = (path) => {
-  const parts = path || [];
-  return parts.map((part, index) => (index === parts.length - 1 && index > 0 ? `<b>${e(part)}</b>` : e(part))).join(' › ');
-};
-const statusHtml = (status) => `<span class="status ${e(status)}">${e(status === 'BlockedByAccessPolicy' ? 'blocked by access policy' : status === 'DeliveryGroupDisabled' ? 'delivery group disabled' : 'granted')}</span>`;
-const userHtml = (row) => `<a href="#/user/${encodeURIComponent(row.user || row.name)}">${e(row.user || row.name)}</a>${row.enabled === false ? ' <span class="off">disabled</span>' : ''}`;
-
-// ------------------------------------------------------------------ rail
-
-function renderRail(route) {
-  const { report } = state;
-  if (route.view === 'compare') state.compare = new Set(route.names.filter((name) => catalogByName(report, name)));
-  const counts = severityCounts(report.recommendations);
-  $('nav-findings-counts').innerHTML = SEVERITIES.filter((severity) => counts[severity])
-    .map((severity) => `<span class="sev ${severity}" title="${severity}">${counts[severity]}</span>`).join('');
-  $('nav-findings').setAttribute('aria-current', route.view === 'findings' ? 'page' : 'false');
-
-  $('catalog-list').innerHTML = report.catalogs.map((catalog) => {
-    const findings = recommendationsFor(report, catalog.name);
-    const high = findings.filter((item) => item.severity === 'High').length;
-    const granted = new Set(catalog.access.filter((entry) => entry.status === 'Granted').map((entry) => entry.user)).size;
-    const kind = `${catalog.provisioningType} · ${catalog.persistent ? 'persistent' : 'pooled'}${catalog.sessionSupport === 'MultiSession' ? ' · multi-session' : ''}`;
-    const current = route.view === 'catalog' && route.name === catalog.name;
-    return `<li>
-      <input type="checkbox" data-compare="${e(catalog.name)}" ${state.compare.has(catalog.name) ? 'checked' : ''} aria-label="Compare ${e(catalog.name)}">
-      <a href="#/catalog/${encodeURIComponent(catalog.name)}" aria-current="${current ? 'page' : 'false'}">
-        <span class="cname"><span>${e(catalog.name)}</span>${high ? `<span class="sev High" title="High findings">${high}</span>` : ''}</span>
-        <span class="cmeta">${e(kind)} · ${plural(catalog.machineCount, 'machine')} · ${plural(granted, 'user')}</span>
-      </a>
-    </li>`;
+// A table with sortable headers, optional row selection and check boxes.
+function grid(container, { key, columns, rows, selected, rowKey, onSelect, checkable, empty = 'Nothing to show.' }) {
+  const sorted = sortRows(key, columns, rows);
+  const sort = state.sort[key];
+  const head = `${checkable ? '<th><span class="sr-only">Select</span></th>' : ''}${columns.map((column, index) =>
+    `<th class="${column.num ? 'num' : ''}" data-sort="${index}" aria-sort="${sort?.index === index ? (sort.desc ? 'descending' : 'ascending') : 'none'}">${e(column.label)}${sort?.index === index ? (sort.desc ? ' ▾' : ' ▴') : ''}</th>`).join('')}`;
+  const body = sorted.map((row) => {
+    const id = rowKey ? rowKey(row) : null;
+    const isSelected = id !== null && id === selected;
+    return `<tr class="${onSelect ? 'selectable' : ''}" ${id !== null ? `data-key="${e(id)}"` : ''} aria-selected="${isSelected}" ${onSelect ? 'tabindex="0"' : ''}>
+      ${checkable ? `<td><input type="checkbox" data-check="${e(id)}" ${state.checked.has(id) ? 'checked' : ''} aria-label="Select ${e(id)}"></td>` : ''}
+      ${columns.map((column) => `<td class="${column.num ? 'num' : ''} ${column.wrap ? 'wrap' : ''}">${column.html ? column.html(row) : e(column.value(row))}</td>`).join('')}
+    </tr>`;
   }).join('');
-  for (const box of document.querySelectorAll('[data-compare]')) {
+  container.innerHTML = rows.length
+    ? `<table class="grid"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`
+    : `<p class="empty">${e(empty)}</p>`;
+
+  for (const th of container.querySelectorAll('th[data-sort]')) {
+    th.style.cursor = 'pointer';
+    th.addEventListener('click', () => {
+      const index = Number(th.dataset.sort);
+      const current = state.sort[key];
+      state.sort[key] = { index, desc: current?.index === index ? !current.desc : false };
+      grid(container, { key, columns, rows, selected, rowKey, onSelect, checkable, empty });
+    });
+  }
+  if (onSelect) {
+    const rowsEls = [...container.querySelectorAll('tr.selectable')];
+    rowsEls.forEach((tr, index) => {
+      tr.addEventListener('click', (event) => {
+        if (event.target.closest('input, a')) return;
+        onSelect(tr.dataset.key);
+      });
+      tr.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') onSelect(tr.dataset.key);
+        if (event.key === 'ArrowDown' && rowsEls[index + 1]) { event.preventDefault(); rowsEls[index + 1].focus(); onSelect(rowsEls[index + 1].dataset.key); }
+        if (event.key === 'ArrowUp' && rowsEls[index - 1]) { event.preventDefault(); rowsEls[index - 1].focus(); onSelect(rowsEls[index - 1].dataset.key); }
+      });
+    });
+    container.querySelector('tr[aria-selected="true"]')?.scrollIntoView({ block: 'nearest' });
+  }
+  for (const box of container.querySelectorAll('[data-check]')) {
     box.addEventListener('change', () => {
-      if (box.checked) state.compare.add(box.dataset.compare);
-      else state.compare.delete(box.dataset.compare);
-      $('compare-button').disabled = state.compare.size < 2;
+      if (box.checked) state.checked.add(box.dataset.check);
+      else state.checked.delete(box.dataset.check);
+      renderListActions();
     });
   }
-  $('compare-button').disabled = state.compare.size < 2;
+  return sorted;
 }
 
-// ------------------------------------------------------------------ views
-
-function findingsList(container, recommendations, idPrefix) {
-  if (!recommendations.length) {
-    container.insertAdjacentHTML('beforeend', '<p class="empty">No findings.</p>');
-    return;
-  }
-  const list = document.createElement('ul');
-  list.className = 'findings';
-  recommendations.forEach((item, index) => {
-    const li = document.createElement('li');
-    const bodyId = `${idPrefix}-${index}`;
-    li.innerHTML = `
-      <button type="button" class="finding-head" aria-expanded="false" aria-controls="${bodyId}">
-        <span><span class="sev ${e(item.severity)}">${e(item.severity)}</span></span>
-        <span class="id">${e(item.id)}</span>
-        <span>${e(item.title)}</span>
-        <span class="where">${e(item.catalogs.join(', '))}</span>
-      </button>
-      <div class="finding-body" id="${bodyId}" hidden><p class="action">${e(item.action)}</p></div>`;
-    const head = li.querySelector('.finding-head');
-    const body = li.querySelector('.finding-body');
-    head.addEventListener('click', () => {
-      const open = head.getAttribute('aria-expanded') === 'true';
-      head.setAttribute('aria-expanded', String(!open));
-      body.hidden = open;
-      if (!open && !body.dataset.filled && item.evidence.length) {
-        body.dataset.filled = '1';
-        const keys = [...new Set(item.evidence.flatMap((row) => Object.keys(row)))];
-        const order = ['user', 'machine', 'catalog', 'application', 'difference', 'found', 'expected', 'version', 'machines', 'deliveryGroup', 'desktopRule', 'rule', 'agentVersion', 'assignedTo', 'lastConnection', 'daysIdle', 'groupPath', 'users', 'levels', 'path', 'cycle', 'newest'];
-        keys.sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99));
-        table(body, {
-          id: `${item.id}-${index}`,
-          csvName: `${item.id}-evidence.csv`,
-          columns: keys.map((key) => ({
-            label: key.replace(/([A-Z])/g, ' $1').toLowerCase(),
-            key,
-            className: /path|cycle|groupPath/.test(key) ? 'path' : /version|found|expected|agentVersion|machine$|lastConnection/.test(key) ? 'mono' : /machines|users|levels|daysIdle/.test(key) ? 'num' : '',
-            html: key === 'user' ? (row) => userHtml({ user: row.user }) : undefined,
-          })),
-          rows: item.evidence,
-        });
-      }
-    });
-    list.appendChild(li);
-  });
-  container.appendChild(list);
-}
-
-function viewFindings(main) {
-  const { report } = state;
-  const counts = severityCounts(report.recommendations);
-  main.innerHTML = `
-    <h1>Findings</h1>
-    <p class="summary-line"><b>${report.summary.catalogs}</b> catalogs · <b>${report.summary.deliveryGroups}</b> delivery groups ·
-      <b>${report.summary.machines}</b> machines · <b>${report.summary.usersWithAccess}</b> users with access ·
-      ${SEVERITIES.map((severity) => `<span class="sev ${severity}">${counts[severity]}</span> ${severity.toLowerCase()}`).join(' · ')}</p>
-    <div class="toolbar"><label>severity <select id="severity-filter"><option value="">all</option>${SEVERITIES.map((severity) =>
-      `<option>${severity}</option>`).join('')}</select></label><span class="shown" id="findings-shown"></span></div>
-    <div id="findings-list"></div>`;
-  const select = $('severity-filter');
-  select.value = state.filters.severity || '';
+// A details table with its own filter and CSV export.
+function detailTable(container, { key, columns, rows, csvName, empty }) {
+  container.innerHTML = `<div class="detail-filter"><input type="search" placeholder="Filter" aria-label="Filter"><span class="count"></span><span class="grow"></span><button type="button">Export CSV</button></div><div class="grid-wrap"></div>`;
+  const input = container.querySelector('input');
+  const wrap = container.querySelector('.grid-wrap');
   const render = () => {
-    state.filters.severity = select.value;
-    const items = report.recommendations.filter((item) => !select.value || item.severity === select.value);
-    $('findings-list').innerHTML = '';
-    $('findings-shown').textContent = `${items.length} of ${report.recommendations.length}`;
-    findingsList($('findings-list'), items, 'finding');
+    const visible = filterRows(rows.map((row) => ({ row, text: columns.map((column) => column.value(row)).join(' ') })), input.value, ['text']).map((item) => item.row);
+    container.querySelector('.count').textContent = `${visible.length} of ${rows.length}`;
+    return grid(wrap, { key, columns, rows: visible, empty });
   };
-  select.addEventListener('change', render);
+  input.addEventListener('input', render);
+  container.querySelector('button').addEventListener('click', () => {
+    download(csvName, toCsv(columns.map((column) => ({ label: column.label, value: column.value })), render()));
+  });
   render();
 }
 
-function viewCatalog(main, name, tab = 'access') {
-  const { report } = state;
-  const catalog = catalogByName(report, name);
-  if (!catalog) {
-    main.innerHTML = `<p class="empty">No catalog named ${e(name)} in this report.</p>`;
-    return;
-  }
-  const machines = report.machines.filter((machine) => machine.catalog === catalog.name);
-  const findings = recommendationsFor(report, catalog.name);
-  const tabs = [
-    ['access', 'Access', catalog.access.length],
-    ['software', 'Software', catalog.software.length],
-    ['machines', 'Machines', machines.length],
-    ['findings', 'Findings', findings.length],
-  ];
-  const vda = catalog.vdaVersions.map((item) => `${e(item.version || 'unknown')} ×${item.machines}`).join(', ') || 'none';
-  main.innerHTML = `
-    <h1>${e(catalog.name)}</h1>
-    <p class="facts"><b>${e(catalog.provisioningType)}</b> · ${e(catalog.allocationType)} · changes ${e(catalog.persistUserChanges)} · ${e(catalog.sessionSupport)} ·
-      ${catalog.persistent ? '<b>persistent</b>' : 'pooled'} · delivery groups: ${catalog.deliveryGroups.length ? e(catalog.deliveryGroups.join(', ')) : '<b>none</b>'} ·
-      VDA ${vda} · software from ${plural(catalog.inventoriedMachines, 'machine')}</p>
-    <div class="tabs" role="tablist">${tabs.map(([key, label, count]) =>
-      `<button type="button" role="tab" aria-selected="${key === tab}" data-tab="${key}">${label}<span class="n">${count}</span></button>`).join('')}</div>
-    <div id="tab-body"></div>`;
-  for (const button of main.querySelectorAll('[data-tab]')) {
-    button.addEventListener('click', () => { location.hash = `#/catalog/${encodeURIComponent(catalog.name)}/${button.dataset.tab}`; });
-  }
-  const body = $('tab-body');
-  const slug = catalog.name.replace(/[^\w.-]+/g, '_');
-  if (tab === 'access') {
-    table(body, {
-      id: 'access',
-      csvName: `${slug}-access.csv`,
-      placeholder: 'filter users, groups, status…',
-      columns: [
-        { label: 'User', key: 'user', html: userHtml },
-        { label: 'Name', key: 'displayName' },
-        { label: 'Delivery group', key: 'deliveryGroup' },
-        { label: 'Status', key: 'status', html: (row) => statusHtml(row.status) },
-        { label: 'Granted by', value: (row) => `${row.grantedBy || ''}${row.desktopRule ? `: ${row.desktopRule}` : ''}`, html: (row) => `<span title="${e(row.grantedBy)}">${e(row.grantedBy === 'Machine assignment' ? 'machine assignment' : row.desktopRule)}</span>` },
-        { label: 'Path', value: (row) => (row.path || []).join(' > '), html: (row) => pathHtml(row.path), className: 'path' },
-        { label: 'Machine', key: 'machine', className: 'mono' },
-      ],
-      rows: catalog.access,
-    });
-  } else if (tab === 'software') {
-    if (!catalog.inventoriedMachines) {
-      body.innerHTML = '<p class="empty">No machine in this catalog was inventoried.</p>';
-      return;
+// ------------------------------------------------------------------ data helpers
+
+const findingsFor = (catalogName) => recommendationsFor(state.report, catalogName);
+const worst = (items) => items.reduce((best, item) => (best === null || severityRank(item.severity) < severityRank(best) ? item.severity : best), null);
+const problemsCell = (items) => (items.length ? `<span class="badge ${e(worst(items))}">${items.length}</span>` : '');
+const groupFindings = (name) => state.report.recommendations.filter((item) =>
+  item.evidence.some((row) => row.deliveryGroup === name || (row.kind === 'delivery group' && row.name === name)));
+const userFindings = (name) => state.report.recommendations.filter((item) => item.evidence.some((row) => row.user === name));
+
+function groupAccess(name) {
+  const seen = new Map();
+  for (const catalog of state.report.catalogs) {
+    for (const entry of catalog.access) {
+      if (entry.deliveryGroup === name && !seen.has(entry.user)) seen.set(entry.user, entry);
     }
-    table(body, {
-      id: 'software',
-      csvName: `${slug}-software.csv`,
+  }
+  if (seen.size) return [...seen.values()];
+  // A delivery group without machines appears in no catalog; fall back to the user list.
+  return state.report.users
+    .filter((user) => user.deliveryGroups.includes(name) || user.blocked.some((item) => item.deliveryGroup === name))
+    .map((user) => ({
+      user: user.name,
+      displayName: user.displayName,
+      enabled: user.enabled,
+      deliveryGroup: name,
+      status: user.blocked.find((item) => item.deliveryGroup === name)?.status || 'Granted',
+      path: [],
+    }));
+}
+
+function userEntries(name) {
+  return state.report.catalogs.flatMap((catalog) => catalog.access
+    .filter((entry) => entry.user === name)
+    .map((entry) => ({ ...entry, catalog: catalog.name })));
+}
+
+// ------------------------------------------------------------------ nodes
+
+const NODES = {
+  catalogs: {
+    label: 'Machine Catalogs',
+    icon: '▦',
+    items: () => state.report.catalogs,
+    key: (catalog) => catalog.name,
+    checkable: true,
+    columns: [
+      { label: 'Machine catalog', value: (c) => c.name },
+      { label: 'Machine type', value: (c) => `${c.provisioningType} · ${c.sessionSupport === 'MultiSession' ? 'Multi-session OS' : 'Single-session OS'}` },
+      { label: 'Allocation', value: (c) => (c.allocationType === 'Static' ? 'Static' : 'Random') },
+      { label: 'User data', value: (c) => (c.persistUserChanges === 'Discard' ? 'Discard' : 'On local disk') },
+      { label: 'Machines', value: (c) => c.machineCount, num: true },
+      { label: 'VDA', value: (c) => c.vdaVersions.map((v) => v.version).filter(Boolean).map((v) => v.split('.')[0]).join(', ') || '—' },
+      { label: 'Delivery groups', value: (c) => c.deliveryGroups.join(', ') || '—' },
+      { label: 'Problems', value: (c) => findingsFor(c.name).length, sort: (c) => findingsFor(c.name).length, html: (c) => problemsCell(findingsFor(c.name)), num: true },
+    ],
+    tabs: ['Details', 'Machines', 'Users', 'Software', 'Problems'],
+    title: (c) => c.name,
+    render: renderCatalog,
+  },
+  groups: {
+    label: 'Delivery Groups',
+    icon: '▤',
+    items: () => state.report.deliveryGroups,
+    key: (g) => g.name,
+    columns: [
+      { label: 'Delivery group', value: (g) => g.name },
+      { label: 'Delivering', value: (g) => (g.desktopKind === 'Private' ? 'Assigned desktops' : 'Random desktops') },
+      { label: 'State', value: (g) => (g.enabled ? 'Enabled' : 'Disabled'), html: (g) => (g.enabled ? 'Enabled' : '<span class="state-warn">Disabled</span>') },
+      { label: 'Machine catalogs', value: (g) => g.catalogs.join(', ') || '—' },
+      { label: 'Machines', value: (g) => g.machineCount, num: true },
+      { label: 'Users', value: (g) => g.grantedUsers, num: true },
+      { label: 'Problems', value: (g) => groupFindings(g.name).length, html: (g) => problemsCell(groupFindings(g.name)), num: true },
+    ],
+    tabs: ['Details', 'Users', 'Access policy', 'Machines'],
+    title: (g) => g.name,
+    render: renderGroup,
+  },
+  users: {
+    label: 'Users',
+    icon: '◉',
+    items: () => state.report.users,
+    key: (u) => u.name,
+    columns: [
+      { label: 'User', value: (u) => u.name },
+      { label: 'Name', value: (u) => u.displayName || '' },
+      { label: 'Account', value: (u) => (u.enabled === false ? 'Disabled' : 'Enabled'), html: (u) => accountCell(u.enabled) },
+      { label: 'Desktops', value: (u) => u.deliveryGroups.length, num: true },
+      { label: 'Machine catalogs', value: (u) => u.catalogs.join(', ') || '—' },
+      { label: 'Blocked', value: (u) => u.blocked.length || '', num: true },
+    ],
+    tabs: ['Access', 'Problems'],
+    title: (u) => `${e(u.name)}${u.displayName ? ` <small>${e(u.displayName)}</small>` : ''}`,
+    render: renderUser,
+  },
+  problems: {
+    label: 'Problems',
+    icon: '⚠',
+    items: () => state.report.recommendations.map((item, index) => ({ ...item, index: String(index + 1) })),
+    key: (p) => p.index,
+    columns: [
+      { label: 'Severity', value: (p) => p.severity, sort: (p) => severityRank(p.severity), html: (p) => `<span class="badge ${e(p.severity)}">${e(p.severity)}</span>` },
+      { label: 'Problem', value: (p) => p.title, wrap: true },
+      { label: 'Affects', value: (p) => p.catalogs.join(', ') || '—', wrap: true },
+      { label: 'Rule', value: (p) => p.id },
+    ],
+    tabs: ['Evidence'],
+    title: (p) => p.title,
+    render: renderProblem,
+  },
+};
+
+// ------------------------------------------------------------------ details renderers
+
+function props(pairs) {
+  return `<dl class="props">${pairs.map(([label, value]) => `<div><dt>${e(label)}</dt><dd>${value}</dd></div>`).join('')}</dl>`;
+}
+const link = (node, name) => `<a href="#/${node}/${encodeURIComponent(name)}">${e(name)}</a>`;
+const accessColumns = (withCatalog) => [
+  { label: 'User', value: (a) => a.user, html: (a) => link('users', a.user) },
+  { label: 'Name', value: (a) => a.displayName || '' },
+  ...(withCatalog ? [{ label: 'Machine catalog', value: (a) => a.catalog }] : []),
+  { label: 'Delivery group', value: (a) => a.deliveryGroup },
+  { label: 'Access', value: (a) => a.status, html: (a) => statusCell(a.status) },
+  { label: 'Account', value: (a) => (a.enabled === false ? 'Disabled' : 'Enabled'), html: (a) => accountCell(a.enabled) },
+  { label: 'Why', value: whyText, html: (a) => `<span class="why">${why(a)}</span>`, wrap: true },
+];
+const machineColumns = [
+  { label: 'Machine', value: (m) => short(m.name) },
+  { label: 'Delivery group', value: (m) => m.deliveryGroup || '—' },
+  { label: 'VDA version', value: (m) => m.agentVersion || '—' },
+  { label: 'OS', value: (m) => m.osType || '' },
+  { label: 'Registration', value: (m) => m.registrationState || '', html: (m) => (m.registrationState === 'Registered' ? 'Registered' : `<span class="state-warn">${e(m.registrationState)}</span>`) },
+  { label: 'Maintenance', value: (m) => (m.inMaintenanceMode ? 'On' : 'Off') },
+  { label: 'Assigned to', value: (m) => m.assignedTo.map(short).join(', ') },
+  { label: 'Last connection', value: (m) => shortDate(m.lastConnectionTime) },
+];
+
+function problemList(container, items) {
+  grid(container, {
+    key: 'details-problems',
+    columns: NODES.problems.columns,
+    rows: items.map((item) => ({ ...item, index: String(state.report.recommendations.indexOf(item) + 1) })),
+    rowKey: (p) => p.index,
+    onSelect: (index) => { location.hash = `#/problems/${index}`; },
+    empty: 'No problems.',
+  });
+}
+
+function renderCatalog(catalog, tab, body) {
+  const machines = state.report.machines.filter((machine) => machine.catalog === catalog.name);
+  const users = new Set(catalog.access.filter((a) => a.status === 'Granted').map((a) => a.user));
+  if (tab === 'Details') {
+    body.innerHTML = props([
+      ['Machine type', e(`${catalog.provisioningType} · ${catalog.sessionSupport === 'MultiSession' ? 'Multi-session OS' : 'Single-session OS'}`)],
+      ['Allocation', e(catalog.allocationType)],
+      ['User data', e(catalog.persistUserChanges === 'Discard' ? 'Discard (pooled)' : 'On local disk (persistent)')],
+      ['Machines', e(`${catalog.machineCount} (${machines.filter((m) => m.registrationState === 'Registered').length} registered)`)],
+      ['VDA versions', catalog.vdaVersions.map((v) => `${e(v.version || 'unknown')} × ${v.machines}`).join('<br>') || '—'],
+      ['Delivery groups', catalog.deliveryGroups.map((name) => link('groups', name)).join(', ') || '<span class="state-warn">None</span>'],
+      ['Users with access', e(users.size)],
+      ['Software inventory', e(catalog.inventoriedMachines ? `${catalog.software.length} applications from ${plural(catalog.inventoriedMachines, 'machine')}` : 'Not collected')],
+    ]);
+  } else if (tab === 'Machines') {
+    detailTable(body, { key: 'catalog-machines', columns: machineColumns, rows: machines, csvName: `${catalog.name}-machines.csv`, empty: 'No machines.' });
+  } else if (tab === 'Users') {
+    detailTable(body, { key: 'catalog-users', columns: accessColumns(false), rows: catalog.access, csvName: `${catalog.name}-users.csv`, empty: 'No user can reach this catalog.' });
+  } else if (tab === 'Software') {
+    detailTable(body, {
+      key: 'catalog-software',
       columns: [
-        { label: 'Application', key: 'name' },
-        { label: 'Publisher', key: 'publisher' },
-        { label: 'Version (machines)', value: (row) => row.versions.map((item) => `${item.version} (${item.machines})`).join(', '), className: 'mono' },
+        { label: 'Application', value: (s) => s.name },
+        { label: 'Publisher', value: (s) => s.publisher || '' },
+        { label: 'Version', value: (s) => s.versions.map((v) => v.version).join(', '), html: (s) => (s.versions.length > 1 ? `<span class="state-warn">${e(s.versions.map((v) => `${v.version} (${v.machines})`).join(', '))}</span>` : e(s.versions[0]?.version || '')) },
+        { label: 'Machines', value: (s) => s.versions.reduce((sum, v) => sum + v.machines, 0), num: true },
       ],
       rows: catalog.software,
-      rowClass: (row) => (row.versions.length > 1 ? 'diff' : ''),
-    });
-  } else if (tab === 'machines') {
-    table(body, {
-      id: 'machines',
-      csvName: `${slug}-machines.csv`,
-      columns: [
-        { label: 'Machine', key: 'name', className: 'mono' },
-        { label: 'Delivery group', value: (row) => row.deliveryGroup || '—' },
-        { label: 'VDA', key: 'agentVersion', className: 'mono' },
-        { label: 'OS', key: 'osType' },
-        { label: 'Registration', key: 'registrationState' },
-        { label: 'Maintenance', value: (row) => (row.inMaintenanceMode ? 'on' : '') },
-        { label: 'Assigned to', value: (row) => row.assignedTo.join(', ') },
-        { label: 'Last connection', value: (row) => shortDate(row.lastConnectionTime), className: 'mono' },
-        { label: 'Apps', value: (row) => (row.softwareCount ?? '—'), className: 'num', num: true },
-      ],
-      rows: machines,
+      csvName: `${catalog.name}-software.csv`,
+      empty: 'No software inventory for this catalog.',
     });
   } else {
-    findingsList(body, findings, 'catalog-finding');
+    problemList(body, findingsFor(catalog.name));
   }
 }
 
-function viewCompare(main, names) {
-  const result = compareCatalogs(state.report, names);
-  if (result.catalogs.length < 2) {
-    main.innerHTML = '<p class="empty">Pick at least two catalogs to compare.</p>';
-    return;
-  }
-  const multi = result.users.filter((row) => row.count > 1).length;
-  const differing = result.software.filter((row) => row.differs).length;
-  const missing = result.software.filter((row) => row.missing).length;
-  main.innerHTML = `
-    <h1>Compare ${plural(result.catalogs.length, 'catalog')}</h1>
-    <p class="facts">${result.catalogs.map((name) => `<a href="#/catalog/${encodeURIComponent(name)}">${e(name)}</a>`).join(' · ')}</p>
-    <section><h2>Users <span class="dim">· ${multi} reach more than one · ${result.sharedByAll} reach all</span></h2><div id="compare-users"></div></section>
-    <section><h2>Software <span class="dim">· ${differing} run different versions · ${missing} missing from at least one catalog</span></h2><div id="compare-software"></div></section>`;
-  viewCompareUsers(result, true);
-  if (result.inventoried.length < 2) {
-    $('compare-software').innerHTML = '<p class="empty">At least two of these catalogs need a software inventory.</p>';
-    return;
-  }
-  table($('compare-software'), {
-    id: 'compare-software',
-    csvName: 'compare-software.csv',
-    columns: [
-      { label: 'Application', key: 'name' },
-      ...result.inventoried.map((name) => ({
-        label: name,
-        value: (row) => (row.catalogs[name] ? row.catalogs[name].join(', ') : ''),
-        html: (row) => (row.catalogs[name] ? e(row.catalogs[name].join(', ')) : '<span class="dim">—</span>'),
-        className: 'mono',
-      })),
-    ],
-    rows: result.software,
-    rowClass: (row) => (row.differs ? 'diff' : ''),
-  });
-}
-
-function viewCompareUsers(result, onlyShared) {
-  const toolbar = table($('compare-users'), {
-    id: `compare-users-${onlyShared}`,
-    csvName: 'compare-users.csv',
-    extra: `<label><input type="checkbox" id="only-shared" ${onlyShared ? 'checked' : ''}> only users in more than one</label>`,
-    columns: [
-      { label: 'User', key: 'user', html: userHtml },
-      { label: 'Name', key: 'displayName' },
-      ...result.catalogs.map((name) => ({
-        label: name,
-        value: (row) => (row.catalogs[name] ? row.catalogs[name].join(', ') : ''),
-        html: (row) => (row.catalogs[name] ? `<span class="tick" title="${e(row.catalogs[name].join(', '))}">✓</span>` : ''),
-        className: 'center',
-      })),
-      { label: 'Catalogs', key: 'count', className: 'num', num: true },
-    ],
-    rows: onlyShared ? result.users.filter((row) => row.count > 1) : result.users,
-  });
-  toolbar.querySelector('#only-shared').addEventListener('change', (event) => {
-    $('compare-users').innerHTML = '';
-    viewCompareUsers(result, event.target.checked);
-  });
-}
-
-function viewUser(main, query) {
-  const matches = lookupUsers(state.report, query);
-  main.innerHTML = `<h1>Users matching “${e(query)}”</h1><p class="facts">${plural(matches.length, 'user')}${matches.length === 25 ? ' (first 25)' : ''}</p><div id="user-results"></div>`;
-  if (!matches.length) {
-    $('user-results').innerHTML = '<p class="empty">No user in this report matches. Users appear only when some rule grants them a desktop.</p>';
-    return;
-  }
-  for (const user of matches) {
-    const section = document.createElement('section');
-    section.innerHTML = `<h2>${e(user.name)} <span class="dim">${e(user.displayName || '')}</span> ${user.enabled === false ? '<span class="off">disabled account</span>' : ''}</h2>
-      <p class="facts">reaches ${user.catalogs.length ? e(user.catalogs.join(', ')) : 'no catalog'}${user.blocked.length ? ` · ${plural(user.blocked.length, 'blocked entry')}` : ''}</p>`;
-    table(section, {
-      id: `user-${user.name}`,
-      csvName: `${user.name.replace(/[^\w.-]+/g, '_')}-access.csv`,
+function renderGroup(group, tab, body) {
+  const machines = state.report.machines.filter((machine) => machine.deliveryGroup === group.name);
+  if (tab === 'Details') {
+    body.innerHTML = props([
+      ['Delivering', e(group.desktopKind === 'Private' ? 'Assigned (static) desktops' : 'Random (pooled) desktops')],
+      ['State', group.enabled ? 'Enabled' : '<span class="state-warn">Disabled</span>'],
+      ['Machine catalogs', group.catalogs.map((name) => link('catalogs', name)).join(', ') || '—'],
+      ['Machines', e(group.machineCount)],
+      ['Users allowed', e(group.grantedUsers)],
+      ['Desktop rules', e(group.desktopRules.map((r) => r.name).join(', ') || 'None')],
+      ['Access policy rules', e(group.accessRules.map((r) => r.name).join(', ') || 'None')],
+    ]);
+  } else if (tab === 'Users') {
+    detailTable(body, { key: 'group-users', columns: accessColumns(false), rows: groupAccess(group.name), csvName: `${group.name}-users.csv`, empty: 'No users.' });
+  } else if (tab === 'Access policy') {
+    const rules = [
+      ...group.desktopRules.map((r) => ({ ...r, type: r.kind === 'Assignment' ? 'Assignment rule' : 'Entitlement rule' })),
+      ...group.accessRules.map((r) => ({ ...r, type: 'Access policy rule' })),
+    ];
+    detailTable(body, {
+      key: 'group-rules',
       columns: [
-        { label: 'Catalog', key: 'catalog', html: (row) => `<a href="#/catalog/${encodeURIComponent(row.catalog)}">${e(row.catalog)}</a>` },
-        { label: 'Delivery group', key: 'deliveryGroup' },
-        { label: 'Status', key: 'status', html: (row) => statusHtml(row.status) },
-        { label: 'Granted by', value: (row) => `${row.grantedBy || ''}${row.desktopRule ? `: ${row.desktopRule}` : ''}`, html: (row) => `<span title="${e(row.grantedBy)}">${e(row.grantedBy === 'Machine assignment' ? 'machine assignment' : row.desktopRule)}</span>` },
-        { label: 'Path', value: (row) => (row.path || []).join(' > '), html: (row) => pathHtml(row.path), className: 'path' },
-        { label: 'Machine', key: 'machine', className: 'mono' },
+        { label: 'Rule', value: (r) => r.name },
+        { label: 'Type', value: (r) => r.type },
+        { label: 'State', value: (r) => (r.enabled ? 'Enabled' : 'Disabled') },
+        { label: 'Includes', value: (r) => r.includedUsers.map(short).join(', '), wrap: true },
+        { label: 'Excludes', value: (r) => r.excludedUsers.map(short).join(', ') || '—', wrap: true },
       ],
-      rows: user.entries,
+      rows: rules,
+      csvName: `${group.name}-rules.csv`,
+      empty: 'No rules.',
     });
-    $('user-results').appendChild(section);
+  } else {
+    detailTable(body, { key: 'group-machines', columns: machineColumns, rows: machines, csvName: `${group.name}-machines.csv`, empty: 'No machines.' });
   }
 }
 
-// ------------------------------------------------------------------ routing
+function renderUser(user, tab, body) {
+  if (tab === 'Access') {
+    detailTable(body, { key: 'user-access', columns: accessColumns(true), rows: userEntries(user.name), csvName: `${short(user.name)}-access.csv`, empty: 'This user reaches no desktop.' });
+  } else {
+    problemList(body, userFindings(user.name));
+  }
+}
+
+function renderProblem(problem, tab, body) {
+  const keys = [...new Set(problem.evidence.flatMap((row) => Object.keys(row)))];
+  const order = ['user', 'machine', 'kind', 'name', 'catalog', 'application', 'difference', 'found', 'expected', 'version', 'machines', 'deliveryGroup', 'desktopRule', 'rule', 'agentVersion', 'assignedTo', 'lastConnection', 'daysIdle', 'groupPath', 'users', 'levels', 'path', 'cycle', 'pattern', 'newest'];
+  keys.sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99));
+  body.innerHTML = `<p class="action"><b>Recommended action.</b> ${e(problem.action)}</p><div></div>`;
+  if (!problem.evidence.length) return;
+  detailTable(body.lastElementChild, {
+    key: `problem-${problem.id}`,
+    columns: keys.map((key) => ({
+      label: key.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase()),
+      value: (row) => (row[key] === true ? 'Yes' : row[key] === false ? 'No' : row[key] ?? ''),
+      html: key === 'user' ? (row) => link('users', row.user) : undefined,
+      wrap: /path|cycle|groupPath/.test(key),
+      num: /^(machines|users|levels|daysIdle)$/.test(key),
+    })),
+    rows: problem.evidence,
+    csvName: `${problem.id}-evidence.csv`,
+  });
+}
+
+function renderCompare(names) {
+  const result = compareCatalogs(state.report, names);
+  $('list-title').textContent = `Compare ${plural(result.catalogs.length, 'catalog')}`;
+  $('list-actions').innerHTML = '<a class="button" href="#/catalogs">Back to catalogs</a>';
+  $('list-filter').parentElement.hidden = true;
+  grid($('list'), { key: 'compare-list', columns: NODES.catalogs.columns, rows: result.catalogs.map((name) => catalogByName(state.report, name)) });
+  const tab = routeTab() || 'Users';
+  renderTabs(['Users', 'Software'], tab, (next) => { location.hash = `#/compare/${names.map(encodeURIComponent).join('|')}/${next}`; });
+  $('details-title').innerHTML = e(tab === 'Users' ? `${result.sharedByAll} users reach all selected catalogs` : `${result.software.filter((s) => s.differs).length} applications differ in version`);
+  const body = $('details');
+  if (tab === 'Users') {
+    detailTable(body, {
+      key: 'compare-users',
+      columns: [
+        { label: 'User', value: (u) => u.user, html: (u) => link('users', u.user) },
+        { label: 'Name', value: (u) => u.displayName || '' },
+        ...result.catalogs.map((name) => ({ label: name, value: (u) => (u.catalogs[name] ? 'Yes' : ''), html: (u) => (u.catalogs[name] ? '<span class="state-ok">✓</span>' : '') })),
+        { label: 'Catalogs', value: (u) => u.count, num: true },
+      ],
+      rows: result.users,
+      csvName: 'compare-users.csv',
+    });
+  } else {
+    detailTable(body, {
+      key: 'compare-software',
+      columns: [
+        { label: 'Application', value: (s) => s.name },
+        ...result.inventoried.map((name) => ({
+          label: name,
+          value: (s) => (s.catalogs[name] ? s.catalogs[name].join(', ') : '—'),
+          html: (s) => (s.catalogs[name] ? (s.differs ? `<span class="state-warn">${e(s.catalogs[name].join(', '))}</span>` : e(s.catalogs[name].join(', '))) : '<span class="dim">—</span>'),
+        })),
+      ],
+      rows: result.software,
+      csvName: 'compare-software.csv',
+    });
+  }
+}
+
+// ------------------------------------------------------------------ layout
 
 function parseRoute() {
   const parts = location.hash.replace(/^#\/?/, '').split('/').map((part) => decodeURIComponent(part));
-  if (parts[0] === 'catalog' && parts[1]) return { view: 'catalog', name: parts[1], tab: parts[2] || 'access' };
-  if (parts[0] === 'compare' && parts[1]) return { view: 'compare', names: parts[1].split('|') };
-  if (parts[0] === 'user' && parts[1]) return { view: 'user', query: parts[1] };
-  return { view: 'findings' };
+  const node = parts[0] in NODES || parts[0] === 'compare' ? parts[0] : 'catalogs';
+  return { node, item: parts[1] || null, tab: parts[2] || null };
+}
+const routeTab = () => parseRoute().tab;
+
+function renderTree(route) {
+  const { report } = state;
+  $('tree-site').innerHTML = `${e(report.site.name)}<small>Collected ${e(shortDate(report.site.collectedAt))} UTC</small>`;
+  const counts = {
+    catalogs: report.catalogs.length,
+    groups: report.deliveryGroups.length,
+    users: report.users.length,
+    problems: report.recommendations.length,
+  };
+  $('tree').innerHTML = Object.entries(NODES).map(([key, node]) => {
+    const current = route.node === key || (route.node === 'compare' && key === 'catalogs');
+    const badge = key === 'problems'
+      ? `<span class="alert" title="High severity">${report.recommendations.filter((r) => r.severity === 'High').length || ''}</span>`
+      : `<span class="count">${counts[key]}</span>`;
+    return `<li><a href="#/${key}" aria-current="${current ? 'page' : 'false'}"><span class="icon" aria-hidden="true">${node.icon}</span>${e(node.label)}${key === 'problems' ? `<span class="count">${counts[key]}</span>` : ''}${badge}</a></li>`;
+  }).join('');
+}
+
+function renderTabs(tabs, active, onPick) {
+  $('details-tabs').innerHTML = tabs.map((tab) => `<button type="button" role="tab" aria-selected="${tab === active}" data-tab="${e(tab)}">${e(tab)}</button>`).join('');
+  for (const button of $('details-tabs').querySelectorAll('button')) button.addEventListener('click', () => onPick(button.dataset.tab));
+}
+
+function renderListActions() {
+  const route = parseRoute();
+  if (route.node !== 'catalogs') {
+    $('list-actions').innerHTML = '';
+    return;
+  }
+  $('list-actions').innerHTML = `<button type="button" id="compare" ${state.checked.size < 2 ? 'disabled' : ''}>Compare selected (${state.checked.size})</button>`;
+  $('compare').addEventListener('click', () => { location.hash = `#/compare/${[...state.checked].map(encodeURIComponent).join('|')}`; });
 }
 
 function render() {
   if (!state.report) return;
   const route = parseRoute();
-  renderRail(route);
-  const main = $('main');
-  if (route.view === 'catalog') viewCatalog(main, route.name, route.tab);
-  else if (route.view === 'compare') viewCompare(main, route.names);
-  else if (route.view === 'user') viewUser(main, route.query);
-  else viewFindings(main);
+  renderTree(route);
+  $('list-filter').parentElement.hidden = false;
+  if (route.node === 'compare') {
+    renderCompare((route.item || '').split('|').filter(Boolean));
+    return;
+  }
+  const node = NODES[route.node];
+  const items = node.items();
+  const selectedItem = items.find((item) => node.key(item) === route.item) || items[0];
+  const selectedKey = selectedItem ? node.key(selectedItem) : null;
+  $('list-title').textContent = node.label;
+  renderListActions();
+
+  const drawList = () => {
+    const visible = filterRows(items.map((item) => ({ item, text: node.columns.map((column) => column.value(item)).join(' ') })), state.listFilter, ['text']).map((row) => row.item);
+    $('list-count').textContent = `${visible.length} of ${items.length}`;
+    grid($('list'), {
+      key: `list-${route.node}`,
+      columns: node.columns,
+      rows: visible,
+      selected: selectedKey,
+      rowKey: node.key,
+      checkable: node.checkable,
+      onSelect: (key) => { location.hash = `#/${route.node}/${encodeURIComponent(key)}`; },
+      empty: 'No items match the filter.',
+    });
+  };
+  $('list-filter').value = state.listFilter;
+  $('list-filter').oninput = () => { state.listFilter = $('list-filter').value; drawList(); };
+  drawList();
+
+  if (!selectedItem) {
+    $('details-title').textContent = '';
+    $('details-tabs').innerHTML = '';
+    $('details').innerHTML = '<p class="empty">Nothing selected.</p>';
+    return;
+  }
+  const tab = node.tabs.includes(route.tab) ? route.tab : node.tabs[0];
+  $('details-title').innerHTML = node === NODES.users ? node.title(selectedItem) : e(node.title(selectedItem));
+  renderTabs(node.tabs, tab, (next) => { location.hash = `#/${route.node}/${encodeURIComponent(selectedKey)}/${encodeURIComponent(next)}`; });
+  $('details').innerHTML = '';
+  node.render(selectedItem, tab, $('details'));
 }
 
 function load(report, label, { resetRoute = true } = {}) {
@@ -387,11 +530,12 @@ function load(report, label, { resetRoute = true } = {}) {
     return;
   }
   notice('');
-  state.compare.clear();
-  state.filters = {};
+  state.checked.clear();
+  state.sort = {};
+  state.listFilter = '';
   const site = report.site;
-  $('site-line').innerHTML = `${e(site.name)} · collected ${e(shortDate(site.collectedAt))}${site.source === 'synthetic' ? '<span class="tag">fictional demo</span>' : ''}${site.pseudonymized ? '<span class="tag">pseudonymized</span>' : ''}`;
-  if (resetRoute && location.hash && location.hash !== '#/') location.hash = '#/';
+  $('site-line').innerHTML = `${site.source === 'synthetic' ? '<span class="tag">fictional demo site</span>' : ''}${site.pseudonymized ? '<span class="tag">pseudonymized</span>' : ''}`;
+  if (resetRoute && location.hash && location.hash !== '#/catalogs') location.hash = '#/catalogs';
   else render();
 }
 
@@ -416,20 +560,24 @@ $('open-file').addEventListener('change', async (event) => {
   }
 });
 $('load-demo').addEventListener('click', () => loadDemo());
-$('compare-button').addEventListener('click', () => {
-  location.hash = `#/compare/${[...state.compare].map(encodeURIComponent).join('|')}`;
+$('user-search').addEventListener('keydown', (event) => {
+  if (event.key !== 'Enter') return;
+  const [match] = lookupUsers(state.report, event.target.value);
+  if (match) location.hash = `#/users/${encodeURIComponent(match.name)}`;
+  else notice(`No user matches "${event.target.value}".`);
 });
-let searchTimer = null;
 $('user-search').addEventListener('input', (event) => {
-  clearTimeout(searchTimer);
-  searchTimer = setTimeout(() => {
-    const query = event.target.value.trim();
-    location.hash = query ? `#/user/${encodeURIComponent(query)}` : '#/';
-  }, 250);
+  if (!state.report) return;
+  notice('');
+  if (parseRoute().node !== 'users') return;
+  state.listFilter = event.target.value;
+  render();
 });
 window.addEventListener('hashchange', () => {
+  const route = parseRoute();
+  if (route.node !== parseRoute.lastNode) state.listFilter = '';
+  parseRoute.lastNode = route.node;
   render();
-  $('main').focus({ preventScroll: true });
 });
 
 // The first load keeps the address, so links to a catalog or a user work.

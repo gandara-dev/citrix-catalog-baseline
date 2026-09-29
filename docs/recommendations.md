@@ -12,6 +12,7 @@ Parameters (also accepted by `New-CcbReport` and `Invoke-CatalogReview.ps1`):
 | `-UnusedDays` | `60` | CCB009 |
 | `-OverlapThreshold` | `0.8` | CCB003 |
 | `-MaxNestingDepth` | `3` | CCB010 |
+| `-CatalogNamePattern`, `-DeliveryGroupNamePattern`, `-MachineNamePattern` | none (check skipped) | CCB014 |
 
 ## CCB001 Disabled account with access (High)
 
@@ -87,3 +88,10 @@ rules can be reviewed together.
 
 A disabled delivery group that still entitles users, usually left over from a
 retirement.
+
+## CCB014 Naming convention (Low)
+
+Catalogs, delivery groups, or machines whose names do not match the regular
+expression configured for their type. The whole name must match; machine
+names are checked without the `DOMAIN\` prefix. Each check runs only when its
+pattern is given. See [naming-convention.md](naming-convention.md).

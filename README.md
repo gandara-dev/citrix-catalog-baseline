@@ -16,9 +16,9 @@ of support, and more.
 > Active Directory calls, the report is a local file, and the page reads it in
 > the browser without uploading it. The public demo is a fictional site.
 
-**[Open the demo](https://gandara-dev.github.io/citrix-catalog-baseline/)**
+**[Open the demo console](https://gandara-dev.github.io/citrix-catalog-baseline/)**
 
-![Access review page](docs/review-page.jpg)
+![Catalog Baseline console](docs/review-page.jpg)
 
 ## Why
 
@@ -48,8 +48,12 @@ Get-CcbSiteSnapshot ──> site.snapshot.json ──> New-CcbReport ──> rep
   machines, and SIDs with stable codes when a snapshot has to be shared.
 - **Analysis** (`Resolve-CcbAccess`, `Get-CcbRecommendation`, `New-CcbReport`):
   the only implementation of the access model and the rules, covered by Pester.
-- **Page** (`site/`): reads `report.json` and never recomputes access; it
-  filters, compares, and exports what the report contains.
+- **Console** (`site/`): a Studio-style view of `report.json`. A tree on the
+  left (Machine Catalogs, Delivery Groups, Users, Problems), the list of objects
+  on top, and a details pane with tabs for the selected one; every access is
+  explained in plain words ("member of GRP-DEPT-FINANCE, which is in
+  GRP-CTX-FINANCE; entitled by DG-LIS-W11-POOL-FINANCE_1"). It never
+  recomputes access; it sorts, filters, compares, and exports to CSV.
 
 ## The access model
 
@@ -84,9 +88,13 @@ path shown for each user. See [docs/access-model.md](docs/access-model.md).
 | CCB011 | Medium | Circular group nesting |
 | CCB012 | Info | Users granted a desktop but blocked by the access policy |
 | CCB013 | Info | Disabled delivery groups that still entitle users |
+| CCB014 | Low | Catalogs, delivery groups, or machines outside your naming convention |
 
 Every recommendation lists the evidence rows that triggered it and a suggested
-action. Thresholds are parameters. Details in
+action. The demo site follows an enterprise naming convention
+(`MC-LIS-W11-POOL-FINANCE`, `DG-LIS-W11-DED-ENGINEERING`, `LISW11FIN001`);
+pass your own as regular expressions for `CCB014`, see
+[docs/naming-convention.md](docs/naming-convention.md). Thresholds are parameters. Details in
 [docs/recommendations.md](docs/recommendations.md).
 
 ## Try it without a Citrix site
@@ -100,7 +108,7 @@ cd citrix-catalog-baseline
 ./scripts/Start-ReviewPage.ps1 -Open
 ```
 
-The page opens the demo; use **open report.json** to load `./review/report.json`.
+The console opens the demo site; use **Open report** to load `./review/report.json`.
 
 ## Run it against a site
 
@@ -136,6 +144,7 @@ JSON Schema check of the sample snapshot. See [docs/testing.md](docs/testing.md)
 
 - [Access model](docs/access-model.md)
 - [Recommendations](docs/recommendations.md)
+- [Naming convention](docs/naming-convention.md)
 - [Data safety](docs/data-safety.md)
 - [Operations guide](docs/operations-guide.md)
 - [Testing guide](docs/testing.md)
@@ -145,7 +154,7 @@ JSON Schema check of the sample snapshot. See [docs/testing.md](docs/testing.md)
 
 ## Current scope
 
-Version `0.1.0` covers on-premises Citrix Virtual Apps and Desktops and
+Version `0.2.0` covers on-premises Citrix Virtual Apps and Desktops and
 desktops only. It does not read Citrix Cloud (DaaS), published applications,
 or application groups, and it does not evaluate the connection type
 (`AllowedConnections`), SmartAccess tags, or client IP filters of access policy

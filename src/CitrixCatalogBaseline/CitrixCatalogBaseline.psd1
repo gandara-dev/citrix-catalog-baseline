@@ -1,6 +1,6 @@
 @{
     RootModule = 'CitrixCatalogBaseline.psm1'
-    ModuleVersion = '0.1.0'
+    ModuleVersion = '0.2.0'
     GUID = '8b720de2-ea8a-43f5-8cb7-03395d84d9cb'
     Author = 'Mateus Gandara'
     Description = 'Inventory and access review for Citrix Virtual Apps and Desktops machine catalogs: machines, software, and who can reach each catalog, with deterministic recommendations.'
