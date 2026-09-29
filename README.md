@@ -17,6 +17,8 @@ of support, and more.
 > the browser without uploading it. The public demo is a fictional site.
 
 **[Open the demo console](https://gandara-dev.github.io/citrix-catalog-baseline/)**
+· or run the module for real in your browser:
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/gandara-dev/citrix-catalog-baseline?quickstart=1)
 
 ![Catalog Baseline console](docs/review-page.jpg)
 

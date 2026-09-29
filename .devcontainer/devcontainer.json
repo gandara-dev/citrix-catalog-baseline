@@ -1,0 +1,23 @@
+{
+  "name": "Citrix Catalog Baseline",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/powershell:1": {}
+  },
+  "forwardPorts": [8767],
+  "portsAttributes": {
+    "8767": { "label": "Catalog Baseline console", "onAutoForward": "openBrowser" }
+  },
+  "postCreateCommand": "pwsh -NoProfile -File .devcontainer/setup.ps1",
+  "postAttachCommand": {
+    "console": "pwsh -NoProfile -File scripts/Start-ReviewPage.ps1 -Port 8767"
+  },
+  "customizations": {
+    "codespaces": {
+      "openFiles": [".devcontainer/README.md"]
+    },
+    "vscode": {
+      "extensions": ["ms-vscode.powershell"]
+    }
+  }
+}
