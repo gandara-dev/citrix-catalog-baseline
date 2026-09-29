@@ -16,6 +16,10 @@ All notable changes to this project are documented here. The format follows
 
 ### Changed
 
+- The review page is now a Studio-style console: a navigation tree (Machine
+  Catalogs, Delivery Groups, Users, Problems), a sortable and filterable list,
+  and a details pane with tabs for the selected object. Every access is
+  explained in plain words, and every table exports to CSV.
 - The synthetic demo site follows an enterprise naming convention for
   catalogs, delivery groups, machines, and AD groups, with one deliberate
   exception for `CCB014`.

@@ -3,45 +3,61 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Access Review | Citrix Catalog Baseline</title>
-  <meta name="description" content="Review Citrix machine catalogs: machines, installed software, who can reach each catalog and through which groups, with deterministic recommendations.">
+  <title>Catalog Baseline Console</title>
+  <meta name="description" content="A Studio-style console for reviewing Citrix machine catalogs, delivery groups, users, and problems from a Catalog Baseline report.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="top">
-    <a class="name" href="https://github.com/gandara-dev/citrix-catalog-baseline">citrix-catalog-baseline</a>
+  <header class="topbar">
+    <span class="product">Catalog Baseline</span>
     <span class="site" id="site-line"></span>
     <span class="grow"></span>
     <label class="search">
       <span class="sr-only">Find a user</span>
-      <input type="search" id="user-search" placeholder="find a user…" autocomplete="off" spellcheck="false">
+      <input type="search" id="user-search" placeholder="Find a user" autocomplete="off" spellcheck="false">
     </label>
-    <button type="button" id="load-demo">demo</button>
-    <label class="button" for="open-file">open report.json</label>
+    <button type="button" id="load-demo">Demo site</button>
+    <label class="button" for="open-file">Open report</label>
     <input type="file" id="open-file" accept="application/json,.json" class="sr-only">
   </header>
   <p class="notice" id="notice" role="alert" hidden></p>
 
-  <div class="layout">
-    <nav class="rail" aria-label="Catalogs">
-      <a class="rail-item" href="#/" id="nav-findings">
-        <span>Findings</span>
-        <span class="counts" id="nav-findings-counts"></span>
-      </a>
-      <div class="rail-head">
-        <span>Machine catalogs</span>
-        <button type="button" class="link" id="compare-button" disabled>compare</button>
-      </div>
-      <ul class="catalogs" id="catalog-list"></ul>
-      <p class="rail-note">Tick two or more catalogs to compare their users and software.</p>
+  <div class="console">
+    <nav class="tree" aria-label="Site">
+      <div class="tree-site" id="tree-site"></div>
+      <ul id="tree"></ul>
     </nav>
 
-    <main class="main" id="main" tabindex="-1"></main>
+    <main class="workspace" id="workspace" tabindex="-1">
+      <section class="list-pane" aria-labelledby="list-title">
+        <div class="pane-head">
+          <h1 id="list-title"></h1>
+          <span class="grow"></span>
+          <div class="pane-actions" id="list-actions"></div>
+        </div>
+        <div class="list-filter">
+          <input type="search" id="list-filter" placeholder="Filter" aria-label="Filter the list" autocomplete="off">
+          <span class="count" id="list-count"></span>
+        </div>
+        <div class="grid-wrap" id="list"></div>
+      </section>
+
+      <section class="details-pane" aria-labelledby="details-title">
+        <div class="pane-head">
+          <h2 id="details-title"></h2>
+          <span class="grow"></span>
+          <div class="pane-actions" id="details-actions"></div>
+        </div>
+        <div class="tabs" role="tablist" id="details-tabs"></div>
+        <div class="details-body" id="details"></div>
+      </section>
+    </main>
   </div>
 
-  <footer class="bottom">
-    Everything here comes from <code>report.json</code>, produced by the PowerShell module on your machine. The file is read in
-    this browser tab and never uploaded. The demo is a fictional site.
+  <footer class="statusbar">
+    <span id="status-left">Read-only view of report.json. The file stays in this browser tab.</span>
+    <span class="grow"></span>
+    <a href="https://github.com/gandara-dev/citrix-catalog-baseline">Source</a>
     <a href="https://github.com/gandara-dev/citrix-catalog-baseline/blob/main/docs/data-safety.md">Data safety</a>
   </footer>
 

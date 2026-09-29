@@ -16,9 +16,9 @@ of support, and more.
 > Active Directory calls, the report is a local file, and the page reads it in
 > the browser without uploading it. The public demo is a fictional site.
 
-**[Open the demo](https://gandara-dev.github.io/citrix-catalog-baseline/)**
+**[Open the demo console](https://gandara-dev.github.io/citrix-catalog-baseline/)**
 
-![Access review page](docs/review-page.jpg)
+![Catalog Baseline console](docs/review-page.jpg)
 
 ## Why
 
@@ -48,8 +48,12 @@ Get-CcbSiteSnapshot ──> site.snapshot.json ──> New-CcbReport ──> rep
   machines, and SIDs with stable codes when a snapshot has to be shared.
 - **Analysis** (`Resolve-CcbAccess`, `Get-CcbRecommendation`, `New-CcbReport`):
   the only implementation of the access model and the rules, covered by Pester.
-- **Page** (`site/`): reads `report.json` and never recomputes access; it
-  filters, compares, and exports what the report contains.
+- **Console** (`site/`): a Studio-style view of `report.json`. A tree on the
+  left (Machine Catalogs, Delivery Groups, Users, Problems), the list of objects
+  on top, and a details pane with tabs for the selected one; every access is
+  explained in plain words ("member of GRP-DEPT-FINANCE, which is in
+  GRP-CTX-FINANCE; entitled by DG-LIS-W11-POOL-FINANCE_1"). It never
+  recomputes access; it sorts, filters, compares, and exports to CSV.
 
 ## The access model
 
@@ -104,7 +108,7 @@ cd citrix-catalog-baseline
 ./scripts/Start-ReviewPage.ps1 -Open
 ```
 
-The page opens the demo; use **open report.json** to load `./review/report.json`.
+The console opens the demo site; use **Open report** to load `./review/report.json`.
 
 ## Run it against a site
 

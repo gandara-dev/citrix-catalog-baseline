@@ -24,7 +24,7 @@
 ./scripts/Start-ReviewPage.ps1 -Open
 ```
 
-Then choose **open report.json** and pick `./review/report.json`.
+Then choose **Open report** and pick `./review/report.json`.
 
 Useful options:
 
