@@ -1,0 +1,2676 @@
+{
+  "schemaVersion": 1,
+  "site": {
+    "name": "Synthetic Lisbon Site",
+    "collectedAt": "2026-09-28T12:00:00Z",
+    "source": "synthetic",
+    "collectorVersion": "0.1.0",
+    "pseudonymized": false
+  },
+  "directory": {
+    "users": [
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2001",
+        "name": "CORP\\ana.alves",
+        "displayName": "Ana Alves",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2002",
+        "name": "CORP\\bruno.barros",
+        "displayName": "Bruno Barros",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2003",
+        "name": "CORP\\carla.costa",
+        "displayName": "Carla Costa",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2004",
+        "name": "CORP\\diego.duarte",
+        "displayName": "Diego Duarte",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2005",
+        "name": "CORP\\elena.esteves",
+        "displayName": "Elena Esteves",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2006",
+        "name": "CORP\\filipe.faria",
+        "displayName": "Filipe Faria",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2007",
+        "name": "CORP\\grace.gomes",
+        "displayName": "Grace Gomes",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2008",
+        "name": "CORP\\hugo.henriques",
+        "displayName": "Hugo Henriques",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2009",
+        "name": "CORP\\ines.alves",
+        "displayName": "Ines Alves",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2010",
+        "name": "CORP\\joao.barros",
+        "displayName": "Joao Barros",
+        "enabled": false
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2011",
+        "name": "CORP\\karin.costa",
+        "displayName": "Karin Costa",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2012",
+        "name": "CORP\\luis.duarte",
+        "displayName": "Luis Duarte",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2013",
+        "name": "CORP\\marta.esteves",
+        "displayName": "Marta Esteves",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2014",
+        "name": "CORP\\nuno.faria",
+        "displayName": "Nuno Faria",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2015",
+        "name": "CORP\\olga.gomes",
+        "displayName": "Olga Gomes",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2016",
+        "name": "CORP\\pedro.henriques",
+        "displayName": "Pedro Henriques",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2017",
+        "name": "CORP\\rita.alves",
+        "displayName": "Rita Alves",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2018",
+        "name": "CORP\\samuel.barros",
+        "displayName": "Samuel Barros",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2019",
+        "name": "CORP\\tania.costa",
+        "displayName": "Tania Costa",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2020",
+        "name": "CORP\\victor.duarte",
+        "displayName": "Victor Duarte",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2021",
+        "name": "CORP\\wanda.esteves",
+        "displayName": "Wanda Esteves",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2022",
+        "name": "CORP\\xavier.faria",
+        "displayName": "Xavier Faria",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2023",
+        "name": "CORP\\yara.gomes",
+        "displayName": "Yara Gomes",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2024",
+        "name": "CORP\\zeca.henriques",
+        "displayName": "Zeca Henriques",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2025",
+        "name": "CORP\\alice.alves",
+        "displayName": "Alice Alves",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2026",
+        "name": "CORP\\bernardo.barros",
+        "displayName": "Bernardo Barros",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2027",
+        "name": "CORP\\clara.costa",
+        "displayName": "Clara Costa",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2028",
+        "name": "CORP\\daniel.duarte",
+        "displayName": "Daniel Duarte",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2029",
+        "name": "CORP\\eva.esteves",
+        "displayName": "Eva Esteves",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2030",
+        "name": "CORP\\fabio.faria",
+        "displayName": "Fabio Faria",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2031",
+        "name": "CORP\\gil.gomes",
+        "displayName": "Gil Gomes",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2032",
+        "name": "CORP\\helena.henriques",
+        "displayName": "Helena Henriques",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2033",
+        "name": "CORP\\ana.barros",
+        "displayName": "Ana Barros",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2034",
+        "name": "CORP\\bruno.costa",
+        "displayName": "Bruno Costa",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2035",
+        "name": "CORP\\carla.duarte",
+        "displayName": "Carla Duarte",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2036",
+        "name": "CORP\\diego.esteves",
+        "displayName": "Diego Esteves",
+        "enabled": false
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2037",
+        "name": "CORP\\elena.faria",
+        "displayName": "Elena Faria",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2038",
+        "name": "CORP\\filipe.gomes",
+        "displayName": "Filipe Gomes",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2039",
+        "name": "CORP\\grace.henriques",
+        "displayName": "Grace Henriques",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2040",
+        "name": "CORP\\hugo.alves",
+        "displayName": "Hugo Alves",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2041",
+        "name": "CORP\\ines.barros",
+        "displayName": "Ines Barros",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2042",
+        "name": "CORP\\joao.costa",
+        "displayName": "Joao Costa",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2043",
+        "name": "CORP\\karin.duarte",
+        "displayName": "Karin Duarte",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2044",
+        "name": "CORP\\luis.esteves",
+        "displayName": "Luis Esteves",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2045",
+        "name": "CORP\\marta.faria",
+        "displayName": "Marta Faria",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2046",
+        "name": "CORP\\nuno.gomes",
+        "displayName": "Nuno Gomes",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2047",
+        "name": "CORP\\olga.henriques",
+        "displayName": "Olga Henriques",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2048",
+        "name": "CORP\\pedro.alves",
+        "displayName": "Pedro Alves",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2049",
+        "name": "CORP\\rita.barros",
+        "displayName": "Rita Barros",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2050",
+        "name": "CORP\\samuel.costa",
+        "displayName": "Samuel Costa",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2051",
+        "name": "CORP\\tania.duarte",
+        "displayName": "Tania Duarte",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2052",
+        "name": "CORP\\victor.esteves",
+        "displayName": "Victor Esteves",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2053",
+        "name": "CORP\\wanda.faria",
+        "displayName": "Wanda Faria",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2054",
+        "name": "CORP\\xavier.gomes",
+        "displayName": "Xavier Gomes",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2055",
+        "name": "CORP\\yara.henriques",
+        "displayName": "Yara Henriques",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2056",
+        "name": "CORP\\zeca.alves",
+        "displayName": "Zeca Alves",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2057",
+        "name": "CORP\\alice.barros",
+        "displayName": "Alice Barros",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2058",
+        "name": "CORP\\bernardo.costa",
+        "displayName": "Bernardo Costa",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2059",
+        "name": "CORP\\clara.duarte",
+        "displayName": "Clara Duarte",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2060",
+        "name": "CORP\\daniel.esteves",
+        "displayName": "Daniel Esteves",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2061",
+        "name": "CORP\\eva.faria",
+        "displayName": "Eva Faria",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2062",
+        "name": "CORP\\fabio.gomes",
+        "displayName": "Fabio Gomes",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2063",
+        "name": "CORP\\gil.henriques",
+        "displayName": "Gil Henriques",
+        "enabled": true
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-2064",
+        "name": "CORP\\helena.alves",
+        "displayName": "Helena Alves",
+        "enabled": true
+      }
+    ],
+    "groups": [
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3001",
+        "name": "CORP\\GRP-VDI-AllStaff",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-3002",
+          "S-1-5-21-1004336348-1177238915-682003330-3003"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3002",
+        "name": "CORP\\GRP-Region-EMEA",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-3004",
+          "S-1-5-21-1004336348-1177238915-682003330-3005"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3003",
+        "name": "CORP\\GRP-Region-Americas",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-3010"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3004",
+        "name": "CORP\\GRP-Office-Lisbon",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-3007",
+          "S-1-5-21-1004336348-1177238915-682003330-3009",
+          "S-1-5-21-1004336348-1177238915-682003330-3011"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3005",
+        "name": "CORP\\GRP-Office-Madrid",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-3008",
+          "S-1-5-21-1004336348-1177238915-682003330-3012"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3006",
+        "name": "CORP\\GRP-Team-Support-L2",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-2045",
+          "S-1-5-21-1004336348-1177238915-682003330-2046",
+          "S-1-5-21-1004336348-1177238915-682003330-2047",
+          "S-1-5-21-1004336348-1177238915-682003330-2048",
+          "S-1-5-21-1004336348-1177238915-682003330-2049"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3007",
+        "name": "CORP\\GRP-Dept-Finance",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-2001",
+          "S-1-5-21-1004336348-1177238915-682003330-2002",
+          "S-1-5-21-1004336348-1177238915-682003330-2003",
+          "S-1-5-21-1004336348-1177238915-682003330-2004",
+          "S-1-5-21-1004336348-1177238915-682003330-2005",
+          "S-1-5-21-1004336348-1177238915-682003330-2006",
+          "S-1-5-21-1004336348-1177238915-682003330-2007",
+          "S-1-5-21-1004336348-1177238915-682003330-2008",
+          "S-1-5-21-1004336348-1177238915-682003330-2009",
+          "S-1-5-21-1004336348-1177238915-682003330-2010"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3008",
+        "name": "CORP\\GRP-Dept-Sales",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-2011",
+          "S-1-5-21-1004336348-1177238915-682003330-2012",
+          "S-1-5-21-1004336348-1177238915-682003330-2013",
+          "S-1-5-21-1004336348-1177238915-682003330-2014",
+          "S-1-5-21-1004336348-1177238915-682003330-2015",
+          "S-1-5-21-1004336348-1177238915-682003330-2016",
+          "S-1-5-21-1004336348-1177238915-682003330-2017",
+          "S-1-5-21-1004336348-1177238915-682003330-2018",
+          "S-1-5-21-1004336348-1177238915-682003330-2019",
+          "S-1-5-21-1004336348-1177238915-682003330-2020",
+          "S-1-5-21-1004336348-1177238915-682003330-2021",
+          "S-1-5-21-1004336348-1177238915-682003330-2022",
+          "S-1-5-21-1004336348-1177238915-682003330-2023",
+          "S-1-5-21-1004336348-1177238915-682003330-2024"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3009",
+        "name": "CORP\\GRP-Dept-HR",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-2025",
+          "S-1-5-21-1004336348-1177238915-682003330-2026",
+          "S-1-5-21-1004336348-1177238915-682003330-2027",
+          "S-1-5-21-1004336348-1177238915-682003330-2028",
+          "S-1-5-21-1004336348-1177238915-682003330-2029",
+          "S-1-5-21-1004336348-1177238915-682003330-2030"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3010",
+        "name": "CORP\\GRP-Dept-Engineering",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-2031",
+          "S-1-5-21-1004336348-1177238915-682003330-2032",
+          "S-1-5-21-1004336348-1177238915-682003330-2033",
+          "S-1-5-21-1004336348-1177238915-682003330-2034",
+          "S-1-5-21-1004336348-1177238915-682003330-2035",
+          "S-1-5-21-1004336348-1177238915-682003330-2036",
+          "S-1-5-21-1004336348-1177238915-682003330-2037",
+          "S-1-5-21-1004336348-1177238915-682003330-2038",
+          "S-1-5-21-1004336348-1177238915-682003330-2039",
+          "S-1-5-21-1004336348-1177238915-682003330-2040",
+          "S-1-5-21-1004336348-1177238915-682003330-2041",
+          "S-1-5-21-1004336348-1177238915-682003330-2042",
+          "S-1-5-21-1004336348-1177238915-682003330-2043",
+          "S-1-5-21-1004336348-1177238915-682003330-2044"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3011",
+        "name": "CORP\\GRP-Dept-Support",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-2050",
+          "S-1-5-21-1004336348-1177238915-682003330-2051",
+          "S-1-5-21-1004336348-1177238915-682003330-2052",
+          "S-1-5-21-1004336348-1177238915-682003330-3006"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3012",
+        "name": "CORP\\GRP-Dept-Operations",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-2053",
+          "S-1-5-21-1004336348-1177238915-682003330-2054",
+          "S-1-5-21-1004336348-1177238915-682003330-2055",
+          "S-1-5-21-1004336348-1177238915-682003330-2056",
+          "S-1-5-21-1004336348-1177238915-682003330-2057",
+          "S-1-5-21-1004336348-1177238915-682003330-2058",
+          "S-1-5-21-1004336348-1177238915-682003330-2059",
+          "S-1-5-21-1004336348-1177238915-682003330-2060",
+          "S-1-5-21-1004336348-1177238915-682003330-2061",
+          "S-1-5-21-1004336348-1177238915-682003330-2062",
+          "S-1-5-21-1004336348-1177238915-682003330-2063",
+          "S-1-5-21-1004336348-1177238915-682003330-2064"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3013",
+        "name": "CORP\\GRP-VDI-General",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-3008",
+          "S-1-5-21-1004336348-1177238915-682003330-3009",
+          "S-1-5-21-1004336348-1177238915-682003330-3007",
+          "S-1-5-21-1004336348-1177238915-682003330-3012"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3014",
+        "name": "CORP\\GRP-VDI-Finance",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-3007"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3015",
+        "name": "CORP\\GRP-VDI-Engineering",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-3010"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3016",
+        "name": "CORP\\GRP-Contractors",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-2043",
+          "S-1-5-21-1004336348-1177238915-682003330-2044"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3017",
+        "name": "CORP\\GRP-RemotePC-Users",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-2053",
+          "S-1-5-21-1004336348-1177238915-682003330-2054",
+          "S-1-5-21-1004336348-1177238915-682003330-2055",
+          "S-1-5-21-1004336348-1177238915-682003330-2056",
+          "S-1-5-21-1004336348-1177238915-682003330-2057",
+          "S-1-5-21-1004336348-1177238915-682003330-2058",
+          "S-1-5-21-1004336348-1177238915-682003330-2059",
+          "S-1-5-21-1004336348-1177238915-682003330-2060"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3018",
+        "name": "CORP\\GRP-Legacy-Apps",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-3019"
+        ]
+      },
+      {
+        "sid": "S-1-5-21-1004336348-1177238915-682003330-3019",
+        "name": "CORP\\GRP-Legacy-Users",
+        "members": [
+          "S-1-5-21-1004336348-1177238915-682003330-3018",
+          "S-1-5-21-1004336348-1177238915-682003330-2061",
+          "S-1-5-21-1004336348-1177238915-682003330-2062"
+        ]
+      }
+    ]
+  },
+  "catalogs": [
+    {
+      "uid": 1,
+      "name": "W11-Pooled-General",
+      "provisioningType": "MCS",
+      "allocationType": "Random",
+      "persistUserChanges": "Discard",
+      "sessionSupport": "SingleSession"
+    },
+    {
+      "uid": 2,
+      "name": "W11-Pooled-Finance",
+      "provisioningType": "MCS",
+      "allocationType": "Random",
+      "persistUserChanges": "Discard",
+      "sessionSupport": "SingleSession"
+    },
+    {
+      "uid": 3,
+      "name": "W11-Dedicated-Engineering",
+      "provisioningType": "MCS",
+      "allocationType": "Static",
+      "persistUserChanges": "OnLocal",
+      "sessionSupport": "SingleSession"
+    },
+    {
+      "uid": 4,
+      "name": "WS2022-Shared-Desktop",
+      "provisioningType": "MCS",
+      "allocationType": "Random",
+      "persistUserChanges": "Discard",
+      "sessionSupport": "MultiSession"
+    },
+    {
+      "uid": 5,
+      "name": "RemotePC-Lisbon",
+      "provisioningType": "Manual",
+      "allocationType": "Static",
+      "persistUserChanges": "OnLocal",
+      "sessionSupport": "SingleSession"
+    },
+    {
+      "uid": 6,
+      "name": "W10-Legacy-Apps",
+      "provisioningType": "MCS",
+      "allocationType": "Random",
+      "persistUserChanges": "Discard",
+      "sessionSupport": "SingleSession"
+    },
+    {
+      "uid": 7,
+      "name": "W11-Pooled-Pilot",
+      "provisioningType": "MCS",
+      "allocationType": "Random",
+      "persistUserChanges": "Discard",
+      "sessionSupport": "SingleSession"
+    }
+  ],
+  "deliveryGroups": [
+    {
+      "uid": 1,
+      "name": "General Desktops",
+      "desktopKind": "Shared",
+      "enabled": true,
+      "desktopRules": [
+        {
+          "name": "General Desktops_1",
+          "kind": "Entitlement",
+          "enabled": true,
+          "includedUserFilterEnabled": true,
+          "includedUsers": [
+            "S-1-5-21-1004336348-1177238915-682003330-3013"
+          ],
+          "excludedUserFilterEnabled": false,
+          "excludedUsers": []
+        }
+      ],
+      "accessRules": [
+        {
+          "name": "General Desktops_AG",
+          "enabled": true,
+          "includedUserFilterEnabled": true,
+          "includedUsers": [
+            "S-1-5-21-1004336348-1177238915-682003330-3013"
+          ],
+          "excludedUserFilterEnabled": false,
+          "excludedUsers": []
+        },
+        {
+          "name": "General Desktops_Direct",
+          "enabled": true,
+          "includedUserFilterEnabled": true,
+          "includedUsers": [
+            "S-1-5-21-1004336348-1177238915-682003330-3013"
+          ],
+          "excludedUserFilterEnabled": false,
+          "excludedUsers": []
+        }
+      ]
+    },
+    {
+      "uid": 2,
+      "name": "Finance Desktops",
+      "desktopKind": "Shared",
+      "enabled": true,
+      "desktopRules": [
+        {
+          "name": "Finance Desktops_1",
+          "kind": "Entitlement",
+          "enabled": true,
+          "includedUserFilterEnabled": true,
+          "includedUsers": [
+            "S-1-5-21-1004336348-1177238915-682003330-3014",
+            "S-1-5-21-1004336348-1177238915-682003330-2014"
+          ],
+          "excludedUserFilterEnabled": false,
+          "excludedUsers": []
+        }
+      ],
+      "accessRules": [
+        {
+          "name": "Finance Desktops_AG",
+          "enabled": true,
+          "includedUserFilterEnabled": true,
+          "includedUsers": [
+            "S-1-5-21-1004336348-1177238915-682003330-3001"
+          ],
+          "excludedUserFilterEnabled": false,
+          "excludedUsers": []
+        }
+      ]
+    },
+    {
+      "uid": 3,
+      "name": "Engineering Workstations",
+      "desktopKind": "Private",
+      "enabled": true,
+      "desktopRules": [
+        {
+          "name": "Engineering Workstations_1",
+          "kind": "Assignment",
+          "enabled": true,
+          "includedUserFilterEnabled": true,
+          "includedUsers": [
+            "S-1-5-21-1004336348-1177238915-682003330-3015"
+          ],
+          "excludedUserFilterEnabled": false,
+          "excludedUsers": []
+        }
+      ],
+      "accessRules": [
+        {
+          "name": "Engineering Workstations_AG",
+          "enabled": true,
+          "includedUserFilterEnabled": true,
+          "includedUsers": [
+            "S-1-5-21-1004336348-1177238915-682003330-3015"
+          ],
+          "excludedUserFilterEnabled": true,
+          "excludedUsers": [
+            "S-1-5-21-1004336348-1177238915-682003330-3016"
+          ]
+        }
+      ]
+    },
+    {
+      "uid": 4,
+      "name": "Shared Desktop",
+      "desktopKind": "Shared",
+      "enabled": true,
+      "desktopRules": [
+        {
+          "name": "Shared Desktop_1",
+          "kind": "Entitlement",
+          "enabled": true,
+          "includedUserFilterEnabled": true,
+          "includedUsers": [
+            "S-1-5-21-1004336348-1177238915-682003330-3001"
+          ],
+          "excludedUserFilterEnabled": false,
+          "excludedUsers": []
+        }
+      ],
+      "accessRules": [
+        {
+          "name": "Shared Desktop_AG",
+          "enabled": true,
+          "includedUserFilterEnabled": false,
+          "includedUsers": [],
+          "excludedUserFilterEnabled": false,
+          "excludedUsers": []
+        }
+      ]
+    },
+    {
+      "uid": 5,
+      "name": "Remote PC Access",
+      "desktopKind": "Private",
+      "enabled": true,
+      "desktopRules": [
+        {
+          "name": "Remote PC Access_1",
+          "kind": "Assignment",
+          "enabled": true,
+          "includedUserFilterEnabled": true,
+          "includedUsers": [
+            "S-1-5-21-1004336348-1177238915-682003330-3017"
+          ],
+          "excludedUserFilterEnabled": false,
+          "excludedUsers": []
+        }
+      ],
+      "accessRules": [
+        {
+          "name": "Remote PC Access_AG",
+          "enabled": true,
+          "includedUserFilterEnabled": true,
+          "includedUsers": [
+            "S-1-5-21-1004336348-1177238915-682003330-3017"
+          ],
+          "excludedUserFilterEnabled": false,
+          "excludedUsers": []
+        }
+      ]
+    },
+    {
+      "uid": 6,
+      "name": "Legacy Desktops (retired)",
+      "desktopKind": "Shared",
+      "enabled": false,
+      "desktopRules": [
+        {
+          "name": "Legacy Desktops_1",
+          "kind": "Entitlement",
+          "enabled": true,
+          "includedUserFilterEnabled": true,
+          "includedUsers": [
+            "S-1-5-21-1004336348-1177238915-682003330-3018"
+          ],
+          "excludedUserFilterEnabled": false,
+          "excludedUsers": []
+        }
+      ],
+      "accessRules": [
+        {
+          "name": "Legacy Desktops_AG",
+          "enabled": true,
+          "includedUserFilterEnabled": true,
+          "includedUsers": [
+            "S-1-5-21-1004336348-1177238915-682003330-3018"
+          ],
+          "excludedUserFilterEnabled": false,
+          "excludedUsers": []
+        }
+      ]
+    }
+  ],
+  "machines": [
+    {
+      "name": "CORP\\VDI-GEN-001",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Adobe Acrobat Reader",
+          "version": "24.003.20112",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Citrix Workspace Environment Management Agent",
+          "version": "2407.1.0.1",
+          "publisher": "Citrix Systems, Inc."
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-GEN-002",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-26T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-003",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-004",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-005",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-26T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-006",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-007",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-008",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-26T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-009",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-010",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-011",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-26T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-012",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-013",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-014",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-26T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-015",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-016",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-017",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-26T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-018",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-019",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-020",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-26T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-021",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-022",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-023",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Unregistered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-26T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-GEN-024",
+      "catalogUid": 1,
+      "deliveryGroupUid": 1,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": true,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-FIN-001",
+      "catalogUid": 2,
+      "deliveryGroupUid": 2,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "126.0.6478.183",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Adobe Acrobat Reader",
+          "version": "24.003.20112",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Citrix Workspace Environment Management Agent",
+          "version": "2407.1.0.1",
+          "publisher": "Citrix Systems, Inc."
+        },
+        {
+          "name": "SAP GUI for Windows",
+          "version": "8.00.3",
+          "publisher": "SAP SE"
+        },
+        {
+          "name": "Microsoft Power BI Desktop",
+          "version": "2.132.908.0",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-FIN-002",
+      "catalogUid": 2,
+      "deliveryGroupUid": 2,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-FIN-003",
+      "catalogUid": 2,
+      "deliveryGroupUid": 2,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-FIN-004",
+      "catalogUid": 2,
+      "deliveryGroupUid": 2,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-FIN-005",
+      "catalogUid": 2,
+      "deliveryGroupUid": 2,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-FIN-006",
+      "catalogUid": 2,
+      "deliveryGroupUid": 2,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-FIN-007",
+      "catalogUid": 2,
+      "deliveryGroupUid": 2,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-FIN-008",
+      "catalogUid": 2,
+      "deliveryGroupUid": 2,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-FIN-009",
+      "catalogUid": 2,
+      "deliveryGroupUid": 2,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-FIN-010",
+      "catalogUid": 2,
+      "deliveryGroupUid": 2,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-SHD-001",
+      "catalogUid": 4,
+      "deliveryGroupUid": 4,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows Server 2022",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Adobe Acrobat Reader",
+          "version": "24.003.20112",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Citrix Workspace Environment Management Agent",
+          "version": "2407.1.0.1",
+          "publisher": "Citrix Systems, Inc."
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-SHD-002",
+      "catalogUid": 4,
+      "deliveryGroupUid": 4,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows Server 2022",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-SHD-003",
+      "catalogUid": 4,
+      "deliveryGroupUid": 4,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows Server 2022",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-SHD-004",
+      "catalogUid": 4,
+      "deliveryGroupUid": 4,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows Server 2022",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-SHD-005",
+      "catalogUid": 4,
+      "deliveryGroupUid": 4,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows Server 2022",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-SHD-006",
+      "catalogUid": 4,
+      "deliveryGroupUid": 4,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows Server 2022",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-LEG-001",
+      "catalogUid": 6,
+      "deliveryGroupUid": null,
+      "agentVersion": "1912.0.9000.26",
+      "osType": "Windows 10",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-05-30T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.14332.20763",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "109.0.5414.120",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "7-Zip",
+          "version": "19.00",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8440.42104",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Java 8 Update 202",
+          "version": "8.0.2020.8",
+          "publisher": "Oracle Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-LEG-002",
+      "catalogUid": 6,
+      "deliveryGroupUid": null,
+      "agentVersion": "1912.0.9000.26",
+      "osType": "Windows 10",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-05-29T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-LEG-003",
+      "catalogUid": 6,
+      "deliveryGroupUid": null,
+      "agentVersion": "1912.0.9000.26",
+      "osType": "Windows 10",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-05-28T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-LEG-004",
+      "catalogUid": 6,
+      "deliveryGroupUid": null,
+      "agentVersion": "1912.0.9000.26",
+      "osType": "Windows 10",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-05-27T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-LEG-005",
+      "catalogUid": 6,
+      "deliveryGroupUid": null,
+      "agentVersion": "1912.0.9000.26",
+      "osType": "Windows 10",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [],
+      "lastConnectionTime": "2026-05-26T09:00:00Z",
+      "software": null
+    },
+    {
+      "name": "CORP\\VDI-ENG-001",
+      "catalogUid": 3,
+      "deliveryGroupUid": 3,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2031"
+      ],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Code",
+          "version": "1.93.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Git",
+          "version": "2.46.0",
+          "publisher": "The Git Development Community"
+        },
+        {
+          "name": "Python 3.12.6 (64-bit)",
+          "version": "3.12.6150.0",
+          "publisher": "Python Software Foundation"
+        },
+        {
+          "name": "PowerShell 7-x64",
+          "version": "7.4.5.0",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-ENG-002",
+      "catalogUid": 3,
+      "deliveryGroupUid": 3,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2032"
+      ],
+      "lastConnectionTime": "2026-09-26T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Code",
+          "version": "1.93.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Git",
+          "version": "2.46.0",
+          "publisher": "The Git Development Community"
+        },
+        {
+          "name": "Python 3.12.6 (64-bit)",
+          "version": "3.12.6150.0",
+          "publisher": "Python Software Foundation"
+        },
+        {
+          "name": "PowerShell 7-x64",
+          "version": "7.4.5.0",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-ENG-003",
+      "catalogUid": 3,
+      "deliveryGroupUid": 3,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2033"
+      ],
+      "lastConnectionTime": "2026-09-25T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Code",
+          "version": "1.93.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Git",
+          "version": "2.46.0",
+          "publisher": "The Git Development Community"
+        },
+        {
+          "name": "Python 3.12.6 (64-bit)",
+          "version": "3.12.6150.0",
+          "publisher": "Python Software Foundation"
+        },
+        {
+          "name": "PowerShell 7-x64",
+          "version": "7.4.5.0",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-ENG-004",
+      "catalogUid": 3,
+      "deliveryGroupUid": 3,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2034"
+      ],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "126.0.6478.183",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Code",
+          "version": "1.93.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Git",
+          "version": "2.46.0",
+          "publisher": "The Git Development Community"
+        },
+        {
+          "name": "Python 3.12.6 (64-bit)",
+          "version": "3.12.6150.0",
+          "publisher": "Python Software Foundation"
+        },
+        {
+          "name": "PowerShell 7-x64",
+          "version": "7.4.5.0",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-ENG-005",
+      "catalogUid": 3,
+      "deliveryGroupUid": 3,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2035"
+      ],
+      "lastConnectionTime": "2026-09-27T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Code",
+          "version": "1.93.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Git",
+          "version": "2.46.0",
+          "publisher": "The Git Development Community"
+        },
+        {
+          "name": "Python 3.12.6 (64-bit)",
+          "version": "3.12.6150.0",
+          "publisher": "Python Software Foundation"
+        },
+        {
+          "name": "PowerShell 7-x64",
+          "version": "7.4.5.0",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-ENG-006",
+      "catalogUid": 3,
+      "deliveryGroupUid": 3,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2036"
+      ],
+      "lastConnectionTime": "2026-07-15T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Code",
+          "version": "1.93.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Git",
+          "version": "2.46.0",
+          "publisher": "The Git Development Community"
+        },
+        {
+          "name": "Python 3.12.6 (64-bit)",
+          "version": "3.12.6150.0",
+          "publisher": "Python Software Foundation"
+        },
+        {
+          "name": "PowerShell 7-x64",
+          "version": "7.4.5.0",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-ENG-007",
+      "catalogUid": 3,
+      "deliveryGroupUid": 3,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2037"
+      ],
+      "lastConnectionTime": "2026-09-25T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Code",
+          "version": "1.93.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Git",
+          "version": "2.46.0",
+          "publisher": "The Git Development Community"
+        },
+        {
+          "name": "PowerShell 7-x64",
+          "version": "7.4.5.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Wireshark 4.2.6 x64",
+          "version": "4.2.6",
+          "publisher": "The Wireshark developer community"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-ENG-008",
+      "catalogUid": 3,
+      "deliveryGroupUid": 3,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2038"
+      ],
+      "lastConnectionTime": "2026-09-28T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Code",
+          "version": "1.93.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Git",
+          "version": "2.46.0",
+          "publisher": "The Git Development Community"
+        },
+        {
+          "name": "Python 3.12.6 (64-bit)",
+          "version": "3.12.6150.0",
+          "publisher": "Python Software Foundation"
+        },
+        {
+          "name": "PowerShell 7-x64",
+          "version": "7.4.5.0",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-ENG-009",
+      "catalogUid": 3,
+      "deliveryGroupUid": 3,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2039"
+      ],
+      "lastConnectionTime": "2026-06-26T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Code",
+          "version": "1.93.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Git",
+          "version": "2.46.0",
+          "publisher": "The Git Development Community"
+        },
+        {
+          "name": "Python 3.12.6 (64-bit)",
+          "version": "3.12.6150.0",
+          "publisher": "Python Software Foundation"
+        },
+        {
+          "name": "PowerShell 7-x64",
+          "version": "7.4.5.0",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-ENG-010",
+      "catalogUid": 3,
+      "deliveryGroupUid": 3,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2040"
+      ],
+      "lastConnectionTime": "2026-09-26T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Code",
+          "version": "1.93.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Git",
+          "version": "2.46.0",
+          "publisher": "The Git Development Community"
+        },
+        {
+          "name": "Python 3.12.6 (64-bit)",
+          "version": "3.12.6150.0",
+          "publisher": "Python Software Foundation"
+        },
+        {
+          "name": "PowerShell 7-x64",
+          "version": "7.4.5.0",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-ENG-011",
+      "catalogUid": 3,
+      "deliveryGroupUid": 3,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2041"
+      ],
+      "lastConnectionTime": "2026-09-25T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Code",
+          "version": "1.93.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Git",
+          "version": "2.39.2",
+          "publisher": "The Git Development Community"
+        },
+        {
+          "name": "Python 3.12.6 (64-bit)",
+          "version": "3.12.6150.0",
+          "publisher": "Python Software Foundation"
+        },
+        {
+          "name": "PowerShell 7-x64",
+          "version": "7.4.5.0",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\VDI-ENG-012",
+      "catalogUid": 3,
+      "deliveryGroupUid": 3,
+      "agentVersion": "2402.0.100.629",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2042"
+      ],
+      "lastConnectionTime": null,
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "7-Zip",
+          "version": "24.08",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft FSLogix Apps",
+          "version": "2.9.8884.27471",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Code",
+          "version": "1.93.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Git",
+          "version": "2.46.0",
+          "publisher": "The Git Development Community"
+        },
+        {
+          "name": "Python 3.12.6 (64-bit)",
+          "version": "3.12.6150.0",
+          "publisher": "Python Software Foundation"
+        },
+        {
+          "name": "PowerShell 7-x64",
+          "version": "7.4.5.0",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\RPC-LIS-001",
+      "catalogUid": 5,
+      "deliveryGroupUid": 5,
+      "agentVersion": "1912.0.9000.26",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2053"
+      ],
+      "lastConnectionTime": "2026-09-25T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Adobe Acrobat Reader",
+          "version": "23.008.20470",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "7-Zip",
+          "version": "22.01",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\RPC-LIS-002",
+      "catalogUid": 5,
+      "deliveryGroupUid": 5,
+      "agentVersion": "1912.0.9000.26",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2054"
+      ],
+      "lastConnectionTime": "2026-09-22T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Adobe Acrobat Reader",
+          "version": "23.008.20470",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "7-Zip",
+          "version": "22.01",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\RPC-LIS-003",
+      "catalogUid": 5,
+      "deliveryGroupUid": 5,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2055"
+      ],
+      "lastConnectionTime": "2026-09-19T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Adobe Acrobat Reader",
+          "version": "23.008.20470",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "7-Zip",
+          "version": "22.01",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\RPC-LIS-004",
+      "catalogUid": 5,
+      "deliveryGroupUid": 5,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2056"
+      ],
+      "lastConnectionTime": "2026-09-16T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Adobe Acrobat Reader",
+          "version": "23.008.20470",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "7-Zip",
+          "version": "22.01",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\RPC-LIS-005",
+      "catalogUid": 5,
+      "deliveryGroupUid": 5,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2057"
+      ],
+      "lastConnectionTime": "2026-09-13T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Adobe Acrobat Reader",
+          "version": "23.008.20470",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "7-Zip",
+          "version": "22.01",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\RPC-LIS-006",
+      "catalogUid": 5,
+      "deliveryGroupUid": 5,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2058"
+      ],
+      "lastConnectionTime": "2026-09-10T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Adobe Acrobat Reader",
+          "version": "23.008.20470",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "7-Zip",
+          "version": "22.01",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\RPC-LIS-007",
+      "catalogUid": 5,
+      "deliveryGroupUid": 5,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Registered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2059"
+      ],
+      "lastConnectionTime": "2026-09-07T09:00:00Z",
+      "software": [
+        {
+          "name": "Microsoft 365 Apps for enterprise",
+          "version": "16.0.18025.20160",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "128.0.2739.79",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "128.0.6613.138",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Adobe Acrobat Reader",
+          "version": "23.008.20470",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "7-Zip",
+          "version": "22.01",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Microsoft Teams",
+          "version": "24215.1007.3082.1590",
+          "publisher": "Microsoft Corporation"
+        }
+      ]
+    },
+    {
+      "name": "CORP\\RPC-LIS-008",
+      "catalogUid": 5,
+      "deliveryGroupUid": 5,
+      "agentVersion": "2203.0.3000.3052",
+      "osType": "Windows 11",
+      "registrationState": "Unregistered",
+      "inMaintenanceMode": false,
+      "assignedUsers": [
+        "S-1-5-21-1004336348-1177238915-682003330-2060"
+      ],
+      "lastConnectionTime": "2026-09-04T09:00:00Z",
+      "software": null
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Access Review | Citrix Catalog Baseline</title>
+  <meta name="description" content="Review Citrix machine catalogs: machines, installed software, who can reach each catalog and through which groups, with deterministic recommendations.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <a class="name" href="https://github.com/gandara-dev/citrix-catalog-baseline">citrix-catalog-baseline</a>
+    <span class="site" id="site-line"></span>
+    <span class="grow"></span>
+    <label class="search">
+      <span class="sr-only">Find a user</span>
+      <input type="search" id="user-search" placeholder="find a user…" autocomplete="off" spellcheck="false">
+    </label>
+    <button type="button" id="load-demo">demo</button>
+    <label class="button" for="open-file">open report.json</label>
+    <input type="file" id="open-file" accept="application/json,.json" class="sr-only">
+  </header>
+  <p class="notice" id="notice" role="alert" hidden></p>
+
+  <div class="layout">
+    <nav class="rail" aria-label="Catalogs">
+      <a class="rail-item" href="#/" id="nav-findings">
+        <span>Findings</span>
+        <span class="counts" id="nav-findings-counts"></span>
+      </a>
+      <div class="rail-head">
+        <span>Machine catalogs</span>
+        <button type="button" class="link" id="compare-button" disabled>compare</button>
+      </div>
+      <ul class="catalogs" id="catalog-list"></ul>
+      <p class="rail-note">Tick two or more catalogs to compare their users and software.</p>
+    </nav>
+
+    <main class="main" id="main" tabindex="-1"></main>
+  </div>
+
+  <footer class="bottom">
+    Everything here comes from <code>report.json</code>, produced by the PowerShell module on your machine. The file is read in
+    this browser tab and never uploaded. The demo is a fictional site.
+    <a href="https://github.com/gandara-dev/citrix-catalog-baseline/blob/main/docs/data-safety.md">Data safety</a>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/gandara-dev/citrix-catalog-baseline/schemas/snapshot.schema.json",
+  "title": "Citrix Catalog Baseline site snapshot",
+  "description": "Schema version 1. Written by Get-CcbSiteSnapshot or New-CcbSyntheticSnapshot and read by the analysis commands. Test-CcbSnapshot also checks references between machines, catalogs, and delivery groups.",
+  "type": "object",
+  "required": ["schemaVersion", "site", "directory", "catalogs", "deliveryGroups", "machines"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "site": {
+      "type": "object",
+      "required": ["name", "collectedAt"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "collectedAt": { "type": "string", "format": "date-time" },
+        "source": { "enum": ["synthetic", "broker-sdk"] },
+        "collectorVersion": { "type": "string" },
+        "pseudonymized": { "type": "boolean" }
+      }
+    },
+    "directory": {
+      "type": "object",
+      "required": ["users", "groups"],
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["sid", "name", "enabled"],
+            "properties": {
+              "sid": { "type": "string", "minLength": 1 },
+              "name": { "type": "string", "minLength": 1 },
+              "displayName": { "type": ["string", "null"] },
+              "enabled": { "type": "boolean" }
+            }
+          }
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["sid", "name", "members"],
+            "properties": {
+              "sid": { "type": "string", "minLength": 1 },
+              "name": { "type": "string", "minLength": 1 },
+              "members": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "catalogs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["uid", "name", "provisioningType", "allocationType", "persistUserChanges", "sessionSupport"],
+        "properties": {
+          "uid": { "type": "integer" },
+          "name": { "type": "string", "minLength": 1 },
+          "provisioningType": { "enum": ["MCS", "Manual", "PVS"] },
+          "allocationType": { "enum": ["Random", "Static"] },
+          "persistUserChanges": { "enum": ["Discard", "OnLocal", "OnPvd"] },
+          "sessionSupport": { "enum": ["SingleSession", "MultiSession"] }
+        }
+      }
+    },
+    "deliveryGroups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["uid", "name", "desktopKind", "enabled", "desktopRules", "accessRules"],
+        "properties": {
+          "uid": { "type": "integer" },
+          "name": { "type": "string", "minLength": 1 },
+          "desktopKind": { "enum": ["Shared", "Private"] },
+          "enabled": { "type": "boolean" },
+          "desktopRules": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                { "$ref": "#/$defs/rule" },
+                { "required": ["kind"], "properties": { "kind": { "enum": ["Entitlement", "Assignment"] } } }
+              ]
+            }
+          },
+          "accessRules": { "type": "array", "items": { "$ref": "#/$defs/rule" } }
+        }
+      }
+    },
+    "machines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "catalogUid", "deliveryGroupUid", "inMaintenanceMode", "assignedUsers", "lastConnectionTime", "software"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "catalogUid": { "type": "integer" },
+          "deliveryGroupUid": { "type": ["integer", "null"] },
+          "agentVersion": { "type": ["string", "null"] },
+          "osType": { "type": ["string", "null"] },
+          "registrationState": { "type": ["string", "null"] },
+          "inMaintenanceMode": { "type": "boolean" },
+          "assignedUsers": { "type": "array", "items": { "type": "string" } },
+          "lastConnectionTime": { "type": ["string", "null"], "format": "date-time" },
+          "software": {
+            "type": ["array", "null"],
+            "items": {
+              "type": "object",
+              "required": ["name"],
+              "properties": {
+                "name": { "type": "string", "minLength": 1 },
+                "version": { "type": ["string", "null"] },
+                "publisher": { "type": ["string", "null"] }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "rule": {
+      "type": "object",
+      "required": ["name", "enabled", "includedUserFilterEnabled", "includedUsers", "excludedUserFilterEnabled", "excludedUsers"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "enabled": { "type": "boolean" },
+        "includedUserFilterEnabled": { "type": "boolean" },
+        "includedUsers": { "type": "array", "items": { "type": "string" } },
+        "excludedUserFilterEnabled": { "type": "boolean" },
+        "excludedUsers": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

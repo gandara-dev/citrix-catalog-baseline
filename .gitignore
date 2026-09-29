@@ -1,0 +1,8 @@
+# Real site data never belongs in the repository.
+*.snapshot.json
+!samples/*.snapshot.json
+report.json
+review/
+TestResults/
+testResults.xml
+*.user
