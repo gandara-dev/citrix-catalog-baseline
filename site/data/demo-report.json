@@ -1,7 +1,7 @@
 {
   "kind": "citrix-catalog-baseline-report",
   "schemaVersion": 1,
-  "generatorVersion": "0.2.0",
+  "generatorVersion": "0.2.1",
   "generatedAt": "2026-09-28T12:00:00Z",
   "site": {
     "name": "LIS - Lisbon (synthetic)",
