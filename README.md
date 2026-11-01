@@ -156,7 +156,7 @@ JSON Schema check of the sample snapshot. See [docs/testing.md](docs/testing.md)
 
 ## Current scope
 
-Version `0.2.0` covers on-premises Citrix Virtual Apps and Desktops and
+Version `0.2.1` covers on-premises Citrix Virtual Apps and Desktops and
 desktops only. It does not read Citrix Cloud (DaaS), published applications,
 or application groups, and it does not evaluate the connection type
 (`AllowedConnections`), SmartAccess tags, or client IP filters of access policy

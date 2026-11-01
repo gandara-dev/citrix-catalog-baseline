@@ -4,7 +4,7 @@
     "name": "LIS - Lisbon (synthetic)",
     "collectedAt": "2026-09-28T12:00:00Z",
     "source": "synthetic",
-    "collectorVersion": "0.2.0",
+    "collectorVersion": "0.2.1",
     "pseudonymized": false
   },
   "directory": {

@@ -6,10 +6,13 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-01
+
 ### Added
 
 - GitHub Codespaces configuration: PowerShell 7 with the module, a first
   synthetic review, and the console on a forwarded port.
+- Dependabot also watches the dev container features.
 
 ## [0.2.0] - 2026-09-29
 

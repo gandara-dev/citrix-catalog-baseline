@@ -72,7 +72,7 @@ AfterAll {
 Describe 'Module' {
     It 'declares the same version it reports at runtime' {
         $manifest = Import-PowerShellDataFile (Join-Path $PSScriptRoot '../src/CitrixCatalogBaseline/CitrixCatalogBaseline.psd1')
-        $manifest.ModuleVersion | Should -Be '0.2.0'
+        $manifest.ModuleVersion | Should -Be '0.2.1'
         $script:synthetic.site.collectorVersion | Should -Be $manifest.ModuleVersion
     }
 
